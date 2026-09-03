@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通話紀錄逐字稿 - 福康客服與車主賴先生</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+            },
+            cust: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              600: '#475569',
+              800: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts: Inter & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .chat-bubble-left::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid #ffffff;
+    }
+    .chat-bubble-right::before {
+      content: '';
+      position: absolute;
+      right: -8px;
+      top: 14px;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #0284c7;
+    }
+    .highlight-mark {
+      background-color: #fef08a;
+      color: #854d0e;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-800 antialiased overflow-hidden">
+
+  <!-- Header Bar -->
+  <header class="bg-white border-b border-slate-200 z-30 flex-shrink-0 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-4">
+        <!-- Brand & Title -->
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-md flex-shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div class="truncate">
+            <div class="flex items-center gap-2">
+              <h1 class="text-base sm:text-lg font-bold text-slate-900 truncate">電話對話逐字紀錄</h1>
+              <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-100 text-emerald-700">已結案轉 LINE</span>
+            </div>
+            <p class="text-xs text-slate-500 truncate">錄音檔：auto-1788320611-5108-0910938003.wav</p>
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="hidden md:flex items-center flex-1 max-w-xs relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </span>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="搜尋對話關鍵字..."
+            class="w-full pl-9 pr-8 py-1.5 text-sm bg-slate-100 border border-transparent rounded-lg focus:bg-white focus:border-sky-500 focus:outline-none transition-all placeholder:text-slate-400"
+            oninput="handleSearch(this.value)"
+          />
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Text Size Buttons -->
+          <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 text-xs font-semibold text-slate-600">
+            <button onclick="changeFontSize(-1)" title="縮小字級" class="w-7 h-7 flex items-center justify-center rounded hover:bg-white transition-colors">A-</button>
+            <div class="w-px h-4 bg-slate-300 mx-0.5"></div>
+            <button onclick="changeFontSize(1)" title="放大字級" class="w-7 h-7 flex items-center justify-center rounded hover:bg-white transition-colors">A+</button>
+          </div>
+
+          <!-- Sidebar Toggle (Info) -->
+          <button
+            onclick="toggleSidebar()"
+            class="p-2 text-slate-600 hover:text-sky-600 hover:bg-slate-100 rounded-lg transition-colors relative"
+            title="查看通話分析與重點"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="sr-only">開關資訊面版</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter quick jump pills bar -->
+    <div class="bg-slate-100/90 border-t border-slate-200 px-4 py-2 overflow-x-auto whitespace-nowrap flex items-center gap-2 text-xs font-medium text-slate-600 scrollbar-none">
+      <span class="text-slate-400 flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        快速段落：
+      </span>
+      <button onclick="scrollToMessage(0)" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-sky-400 hover:text-sky-600 transition-colors shadow-2xs">
+        1. 確認更換尾門
+      </button>
+      <button onclick="scrollToMessage(4)" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-sky-400 hover:text-sky-600 transition-colors shadow-2xs">
+        2. 統編與個人抬頭爭執
+      </button>
+      <button onclick="scrollToMessage(16)" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-sky-400 hover:text-sky-600 transition-colors shadow-2xs">
+        3. 發票資訊說明
+      </button>
+      <button onclick="scrollToMessage(28)" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-sky-400 hover:text-sky-600 transition-colors shadow-2xs">
+        4. 施作場地責任問題
+      </button>
+      <button onclick="scrollToMessage(45)" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-sky-400 hover:text-sky-600 transition-colors shadow-2xs">
+        5. 業務交接與LINE確認
+      </button>
+    </div>
+  </header>
+
+  <!-- Main View Area -->
+  <div class="flex-1 flex overflow-hidden relative max-w-7xl w-full mx-auto">
+    <!-- Messages Scroll Container -->
+    <main id="chatContainer" class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <!-- Conversation Metadata Alert Box -->
+      <div class="bg-blue-50 border border-blue-200/80 rounded-xl p-4 flex items-start gap-3 text-sm text-blue-900 shadow-2xs">
+        <svg class="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div class="space-y-1">
+          <p class="font-semibold">對話背景說明：</p>
+          <p class="text-blue-800 leading-relaxed text-xs sm:text-sm">
+            車主賴先生遭後方追撞（初判表對方全責），對方不願意走車險願意自付賠償。福康客服來電確認更換尾門套件之報價抬頭與施作場地，過程中牽涉發票開立、外縣市維修場地協調及內部業務資訊交接等問題。
+          </p>
+        </div>
+      </div>
+
+      <!-- Dialogue Bubbles Stream (Populated by JS) -->
+      <div id="messagesList" class="space-y-4"></div>
+
+      <!-- End of conversation indicator -->
+      <div class="text-center py-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-600">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          通話結束（共 55 句對白）
+        </span>
+      </div>
+    </main>
+
+    <!-- Sidebar / Drawer for Key Takeaways & Speakers Info -->
+    <aside id="infoSidebar" class="w-80 border-l border-slate-200 bg-white flex-shrink-0 flex flex-col transition-all duration-300 ease-in-out absolute lg:static inset-y-0 right-0 z-20 shadow-xl lg:shadow-none translate-x-full lg:translate-x-0">
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+        <h2 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <svg class="w-4 h-4 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          通話重點摘要
+        </h2>
+        <button onclick="toggleSidebar()" class="lg:hidden p-1 text-slate-400 hover:text-slate-600 rounded">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 space-y-5 text-xs text-slate-600">
+        <!-- Participants Card -->
+        <div class="space-y-2">
+          <p class="font-semibold text-slate-400 uppercase tracking-wider text-[10px]">通話對象</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2.5 p-2 rounded-lg bg-slate-50 border border-slate-200/70">
+              <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs">客</div>
+              <div>
+                <p class="font-semibold text-slate-800 text-xs">福康客服</p>
+                <p class="text-[11px] text-slate-500">總公司客服端（台北）</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 p-2 rounded-lg bg-sky-50 border border-sky-200/70">
+              <div class="w-7 h-7 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-xs">賴</div>
+              <div>
+                <p class="font-semibold text-sky-900 text-xs">賴先生（車主）</p>
+                <p class="text-[11px] text-sky-700">受害方（全責追撞案）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue 1: Billing / Invoice -->
+        <div class="bg-amber-50/70 border border-amber-200/80 rounded-lg p-3 space-y-1.5">
+          <div class="flex items-center gap-1.5 text-amber-800 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            爭議一：報價抬頭與發票
+          </div>
+          <p class="text-amber-900/80 leading-normal">
+            客服詢問統編引起賴先生不解（一般個人無統編）。確認對方不走車險自付後，達成協議以<strong>賴先生個人大名開立報價單與二聯式發票</strong>。
+          </p>
+        </div>
+
+        <!-- Issue 2: Location -->
+        <div class="bg-rose-50/70 border border-rose-200/80 rounded-lg p-3 space-y-1.5">
+          <div class="flex items-center gap-1.5 text-rose-800 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+            爭議二：更換施作場地
+          </div>
+          <p class="text-rose-900/80 leading-normal">
+            客服詢問車主能否提供施工場地，賴先生強調自己是一般車主非車廠，且以往維修是福康人員直接與福特廠洽借。客服最後承諾<strong>轉由業務專人協助協調場地</strong>。
+          </p>
+        </div>
+
+        <!-- Issue 3: Handover -->
+        <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-lg p-3 space-y-1.5">
+          <div class="flex items-center gap-1.5 text-indigo-800 font-semibold">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            爭議三：內部交接斷層
+          </div>
+          <p class="text-indigo-900/80 leading-normal">
+            賴先生反應上週已向分機業務詳細說明過情況，客服卻不知情。客服表示會再行向內部同仁確認。
+          </p>
+        </div>
+
+        <!-- Next Step -->
+        <div class="border-t border-slate-200 pt-3">
+          <p class="font-semibold text-slate-700 mb-1">後續處理結論：</p>
+          <ul class="list-disc list-inside space-y-1 text-slate-500">
+            <li>客服製作報價單並透過 <strong>LINE</strong> 傳送給賴先生。</li>
+            <li>賴先生轉交全責肇事方確認維修金額。</li>
+            <li>福康業務接手協調施作車廠。</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm shadow-lg opacity-0 transition-opacity pointer-events-none z-50 flex items-center gap-2">
+    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="toastMsg">已複製內容</span>
+  </div>
+
+  <script>
+    // Full verbatim conversation dataset
+    const transcript = [
+      { speaker: "福康客服", text: "喂，你好。", time: "00:01", topic: "greeting" },
+      { speaker: "賴先生", text: "欸，你好。", time: "00:02", topic: "greeting" },
+      { speaker: "福康客服", text: "請問是賴先生嗎？我這邊福康。", time: "00:03", topic: "greeting" },
+      { speaker: "賴先生", text: "欸，是。", time: "00:05", topic: "greeting" },
+      { speaker: "福康客服", text: "欸，是。您那個車子它現在是要更換那個尾門套件嘛，那我需要報價給您，那……我需要統編或者是您的抬頭這樣子，因為我們要出報價單。", time: "00:07", topic: "invoice" },
+      { speaker: "賴先生", text: "統編？", time: "00:18", topic: "invoice" },
+      { speaker: "福康客服", text: "喂？", time: "00:20", topic: "invoice" },
+      { speaker: "賴先生", text: "欸，你說需要統編，那……我直接這樣子好，一般人哪來的統編啊？", time: "00:22", topic: "invoice" },
+      { speaker: "福康客服", text: "呃，不然就是用您的名字，可是我不確定說您這個是出險嗎？您這個是，因為有跟保險公司請款嗎？還是……", time: "00:28", topic: "claim" },
+      { speaker: "賴先生", text: "欸……對啊，那個……第一、我……我是被追撞的。", time: "00:36", topic: "claim" },
+      { speaker: "福康客服", text: "嗯。", time: "00:40", topic: "claim" },
+      { speaker: "賴先生", text: "嗯，初判表一出來對方是全……全責，然後對方他說他不要、他不要走那個……那個車險。", time: "00:41", topic: "claim" },
+      { speaker: "福康客服", text: "他不要走車險，那這樣子我的報價單就是開給賴先生，還是開給對方？", time: "00:49", topic: "quote" },
+      { speaker: "賴先生", text: "你開給我就好啦，你……你就是跟我報價就好了啊，對對對。", time: "00:54", topic: "quote" },
+      { speaker: "福康客服", text: "好，那這樣子是用賴先生的名字去開，但就是之後就是開二聯的發票給賴先生這樣子。", time: "00:58", topic: "quote" },
+      { speaker: "賴先生", text: "二聯的發票，呃……我……我有點搞不懂就是，為什麼報價還要、還要開發票給我，還是什麼的啊？", time: "01:05", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "嗯，您請說。喔，沒有沒有，就是我們要、我們要報價單的話，要先有客戶的資訊。那如果我們確定要出貨、出料，我們都一定要開立發票。", time: "01:13", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "喔……", time: "01:23", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "對，所以我會先要您的資訊，然後來做那個報價單的資訊。那如果這個報價你們確認OK，我們要出貨的時候，或者是我們要請人員去安裝的時候，就是會開、要開立發票給您。", time: "01:25", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "啊對啊，那你們開發票就好了啊，為什麼還要我說……我……我的什麼……什麼發票資訊？什麼叫發票資訊啊？", time: "01:36", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "就是像現在您、您如果是個人，就是要給我您的大名這樣子。", time: "01:44", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "喔……", time: "01:48", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "那如果您是公司，對，如果您是公司……", time: "01:50", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "好好好，這……這樣就好了，好好好。", time: "01:52", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "如果您是公司行號的話……對，因為我不確定說您現在是要對保險公司，還是對您這樣子，所以我們要確認一下資訊，對。", time: "01:54", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "喔……好啊，那……那個跟我聯絡，這……直接像這樣子聯絡講就好了，因為……因為我……我真的沒有聽過人家要賠償，我還要提供什麼……什麼……什麼發票資訊啊，對啊。", time: "02:02", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "嗯。不是，這是我們公司的報價流程，不好意思。", time: "02:14", topic: "invoice_explanation" },
+      { speaker: "賴先生", text: "沒……沒有沒有，那你就直接講就好了啊，對啊，那……", time: "02:18", topic: "invoice_explanation" },
+      { speaker: "福康客服", text: "那我想請問一下您這樣子的話施作的方式呢？您這邊……是提供……場地？", time: "02:22", topic: "location" },
+      { speaker: "賴先生", text: "你……你知道我是誰嗎？呵呵呵，我……我也不是車廠。", time: "02:29", topic: "location" },
+      { speaker: "福康客服", text: "是。您是車主本人嗎？", time: "02:35", topic: "location" },
+      { speaker: "賴先生", text: "欸。我是車主本人的，那你寄零件給我，我……我要怎麼換？", time: "02:37", topic: "location" },
+      { speaker: "福康客服", text: "對對對。欸沒有，所以我要跟您確認說，就是可以在哪裡施作，這些我們就是如果確認之後報價的話都要跟您做確認，對，所以可能要先請您幫我們確認一下說有沒有地方可以施作這樣子。", time: "02:41", topic: "location" },
+      { speaker: "賴先生", text: "有沒有地方可以施作？這個是我要提供的嗎？", time: "02:53", topic: "location" },
+      { speaker: "福康客服", text: "嗯。或者是說您的對方那個肇事者有辦法提供場地做施作這樣子，對。", time: "02:59", topic: "location" },
+      { speaker: "賴先生", text: "喔，所以……所以你們自己公司本身沒辦法處理，然後要去跟……跟……跟我們借場地？我知道你們在台北，啊我的車也是跟你們買的，但是……也……也有南部的服務處之類的吧？", time: "03:06", topic: "location" },
+      { speaker: "福康客服", text: "我們在台北。對對對，所以我需要……對對對，啊所……嗯。", time: "03:17", topic: "location" },
+      { speaker: "賴先生", text: "之前……之前我……我也有相關維修問題，你們的人是直接約在那個福特車廠的呢，是你們的人可以直接去跟他們對方溝通借的呢，怎麼現在變成我要提供了？", time: "03:22", topic: "location" },
+      { speaker: "福康客服", text: "嗯。呃，不好意思，因為事故車……", time: "03:33", topic: "location" },
+      { speaker: "賴先生", text: "我不知道有這……", time: "03:37", topic: "location" },
+      { speaker: "福康客服", text: "事故車的部分啊，場地我們可能就是要請車主這邊做協調，或者是請我們的業務跟您聯絡，然後請他幫您做協調這樣子，對。", time: "03:38", topic: "location" },
+      { speaker: "賴先生", text: "對啊，怎麼會是我……我來提供呢？欸，我只是一般民眾，好不好？我也沒有什麼認識什麼車廠什麼的，然後我要……我要去車廠，人家願意借我嗎？對啊，那你們跟福特那邊有合作的，你們跟福特的應該會比較好溝通吧？", time: "03:48", topic: "location" },
+      { speaker: "福康客服", text: "呃，這個我會請業務協助，只是我們想要先確認一下狀況而已。那我先跟……那我等一下會先出報價單給賴先生，那賴先生再幫我給對方這樣看一下，確認說金額的部分是不是OK這樣子。那如果後續還有需要調整，再跟我們說。", time: "04:02", topic: "quote_confirm" },
+      { speaker: "賴先生", text: "喔，好啊，可以啊。", time: "04:18", topic: "quote_confirm" },
+      { speaker: "福康客服", text: "嗯，好，那我等一下先出報價單給您。", time: "04:20", topic: "quote_confirm" },
+      { speaker: "賴先生", text: "那我……我上個禮拜跟業務員講那麼多，結果……你現在打來好像你都不知道狀況耶，你……你講的我都已經跟業務員講過了。", time: "04:22", topic: "handover" },
+      { speaker: "福康客服", text: "您是跟哪一位業務聯繫？", time: "04:31", topic: "handover" },
+      { speaker: "賴先生", text: "我是直接打電話到分……分機那邊的，欸，他也沒有報姓名。", time: "04:33", topic: "handover" },
+      { speaker: "福康客服", text: "喔好，那我再幫您確認，對，不好意思，這樣也麻煩您了，謝謝。", time: "04:38", topic: "handover" },
+      { speaker: "賴先生", text: "喔好，OK。", time: "04:44", topic: "closing" },
+      { speaker: "福康客服", text: "嗯，謝謝，拜拜。", time: "04:45", topic: "closing" },
+      { speaker: "賴先生", text: "那你要……你要用那個嗎？你要用 LINE 傳報價單嗎？", time: "04:47", topic: "closing" },
+      { speaker: "福康客服", text: "對，我等一下會再傳……上傳到上面，嗯，謝謝您喔。", time: "04:51", topic: "closing" },
+      { speaker: "賴先生", text: "好，謝謝。", time: "04:55", topic: "closing" },
+      { speaker: "福康客服", text: "好，謝謝，拜拜。", time: "04:56", topic: "closing" }
+    ];
+
+    let currentFontSizeLevel = 0; // -1, 0, 1, 2
+    const fontSizes = ['text-xs sm:text-sm', 'text-sm sm:text-base', 'text-base sm:text-lg', 'text-lg sm:text-xl'];
+
+    // Render list into DOM
+    function renderMessages(filterKeyword = "") {
+      const container = document.getElementById("messagesList");
+      container.innerHTML = "";
+      const keyword = filterKeyword.trim().toLowerCase();
+
+      transcript.forEach((item, index) => {
+        const isCustomer = item.speaker === "賴先生";
+        const hasKeyword = keyword ? item.text.toLowerCase().includes(keyword) : true;
+        
+        let displayText = escapeHTML(item.text);
+        if (keyword && hasKeyword) {
+          const regex = new RegExp(`(${escapeRegex(keyword)})`, 'gi');
+          displayText = displayText.replace(regex, '<mark class="highlight-mark">$1</mark>');
+        }
+
+        const msgWrapper = document.createElement("div");
+        msgWrapper.id = `msg-${index}`;
+        msgWrapper.className = `flex gap-3 group transition-opacity duration-200 ${isCustomer ? 'justify-end' : 'justify-start'} ${keyword && !hasKeyword ? 'opacity-25' : 'opacity-100'}`;
+
+        const avatar = isCustomer
+          ? `<div class="w-8 h-8 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-xs flex-shrink-0 shadow-sm mt-1 ring-2 ring-sky-100">賴</div>`
+          : `<div class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0 shadow-sm mt-1 ring-2 ring-slate-100">客</div>`;
+
+        const bubbleClass = isCustomer
+          ? 'bg-sky-600 text-white rounded-2xl rounded-tr-none shadow-sm chat-bubble-right'
+          : 'bg-white text-slate-800 rounded-2xl rounded-tl-none shadow-sm border border-slate-200/80 chat-bubble-left';
+
+        const roleLabel = isCustomer
+          ? `<span class="text-[11px] font-medium text-sky-700">車主 (賴先生)</span>`
+          : `<span class="text-[11px] font-medium text-slate-500">福康客服</span>`;
+
+        msgWrapper.innerHTML = `
+          ${!isCustomer ? avatar : ''}
+          <div class="max-w-[85%] sm:max-w-[75%] space-y-1 relative">
+            <div class="flex items-center gap-2 ${isCustomer ? 'justify-end' : 'justify-start'} px-1">
+              ${roleLabel}
+              <span class="text-[10px] text-slate-400 font-mono">${item.time}</span>
+              <button 
+                onclick="copyToClipboard('${escapeJsString(item.text)}')" 
+                title="複製此句"
+                class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-slate-600 p-0.5 transition-opacity"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="p-3 sm:p-3.5 ${bubbleClass} relative leading-relaxed break-words text-content ${fontSizes[currentFontSizeLevel + 1]}">
+              ${displayText}
+            </div>
+          </div>
+          ${isCustomer ? avatar : ''}
+        `;
+
+        container.appendChild(msgWrapper);
+      });
+    }
+
+    // Utilities
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+    }
+
+    function escapeJsString(str) {
+      return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
+    }
+
+    // Search Handling
+    function handleSearch(val) {
+      const clearBtn = document.getElementById("clearSearchBtn");
+      if (val.trim()) {
+        clearBtn.classList.remove("hidden");
+      } else {
+        clearBtn.classList.add("hidden");
+      }
+      renderMessages(val);
+
+      // Scroll to first matched element
+      if (val.trim()) {
+        const firstMatch = transcript.findIndex(item => item.text.toLowerCase().includes(val.trim().toLowerCase()));
+        if (firstMatch !== -1) {
+          scrollToMessage(firstMatch);
+        }
+      }
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("searchInput");
+      input.value = "";
+      document.getElementById("clearSearchBtn").classList.add("hidden");
+      renderMessages("");
+    }
+
+    // Scroll to specific message
+    function scrollToMessage(index) {
+      const target = document.getElementById(`msg-${index}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Pulse effect
+        target.classList.add('scale-[1.01]', 'transition-transform');
+        setTimeout(() => target.classList.remove('scale-[1.01]'), 500);
+      }
+    }
+
+    // Adjust font size
+    function changeFontSize(delta) {
+      const nextLevel = currentFontSizeLevel + delta;
+      if (nextLevel >= -1 && nextLevel <= 2) {
+        currentFontSizeLevel = nextLevel;
+        renderMessages(document.getElementById("searchInput").value);
+        showToast(`字體已切換`);
+      }
+    }
+
+    // Copy to clipboard fallback safely
+    function copyToClipboard(text) {
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = text;
+      tempTextArea.style.position = "fixed";
+      tempTextArea.style.left = "-9999px";
+      document.body.appendChild(tempTextArea);
+      tempTextArea.focus();
+      tempTextArea.select();
+      try {
+        document.execCommand('copy');
+        showToast("對話內容已複製！");
+      } catch (err) {
+        showToast("複製失敗，請手動選取");
+      }
+      document.body.removeChild(tempTextArea);
+    }
+
+    // Toast banner
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toastMsg");
+      toastMsg.innerText = msg;
+      toast.classList.remove("opacity-0");
+      toast.classList.add("opacity-100");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("opacity-100");
+        toast.classList.add("opacity-0");
+      }, 2000);
+    }
+
+    // Toggle Sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById("infoSidebar");
+      sidebar.classList.toggle("translate-x-full");
+    }
+
+    // Initialize on load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderMessages();
+    });
+  </script>
+</body>
+</html>
