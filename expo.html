@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>輔康照顧博覽會話術</title>
+<style>*{box-sizing:border-box}html,body{margin:0}body{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<style>
+/* 單欄手機卡片流：依對話順序由上而下 */
+:root{--red:#D70029;--fg:#595757;--sub:#949495;--line:#C9CACA;--bg:#ffffff;--card:#f3f3f3;
+--f:"獅尾螺帽腿黑-Demi-Light","Noto Sans TC","PingFang TC",sans-serif;--fb:"獅尾螺帽腿黑-Bold","Noto Sans TC","PingFang TC",sans-serif;--fk:"獅尾螺帽腿黑-Black","Noto Sans TC","PingFang TC",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fg:#e4e3e3;--sub:#a9a9aa;--line:#4a4848;--bg:#1d1c1c;--card:#2a2929;--red:#ff4d6a;color-scheme:dark}}
+:root[data-theme="dark"]{--fg:#e4e3e3;--sub:#a9a9aa;--line:#4a4848;--bg:#1d1c1c;--card:#2a2929;--red:#ff4d6a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:16px;line-height:1.7}
+.w{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:20px 40px;display:flex;flex-direction:column;gap:18px}
+header .brand{font-family:var(--fb);font-size:13px;letter-spacing:.12em;color:var(--sub)}
+h1{font-family:var(--fk);font-size:26px;margin:4px 0 2px;line-height:1.3;text-wrap:balance}
+h1 em{font-style:normal;color:var(--red)}
+.goal{color:var(--sub);font-size:14px;margin:0}
+section{border-top:1px solid var(--line);padding-top:14px}
+.step{font-family:var(--fb);font-size:13px;color:var(--red);letter-spacing:.08em}
+h2{font-family:var(--fb);font-size:19px;margin:2px 0 8px}
+.say{background:var(--card);border-radius:10px;padding:12px 14px;margin:0 0 8px;font-size:17px}
+.tip{color:var(--sub);font-size:14px;margin:0}
+ul{margin:0;padding-left:1.2em}
+li{margin-bottom:6px}
+li b{font-family:var(--fb)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td{border-bottom:1px solid var(--line);padding:8px 4px;vertical-align:top}
+td:first-child{font-family:var(--fb);white-space:nowrap;width:7em}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0}
+.chk input{width:20px;height:20px;margin-top:4px;accent-color:var(--red)}
+</style>
+</head>
+<body>
+<div class="w">
+<header>
+<div class="brand">FORKARE 輔康 · 台北國際照顧博覽會</div>
+<h1>攤位拜訪話術：<em>福祉車</em>需求</h1>
+<p class="goal">目標：30 秒內確認對方有沒有接送需求，留下聯絡人。</p>
+</header>
+
+<section>
+<div class="step">STEP 1</div>
+<h2>開場</h2>
+<p class="say">您好，我是輔康企業的○○，我們專門改裝福祉車（無障礙接送車），升降機、斜坡款式都有。想跟您請教一下，貴單位平常有在接送長輩或行動不便的朋友嗎？</p>
+<p class="tip">先問「有沒有接送」，不要一開始就推銷車子。</p>
+</section>
+
+<section>
+<div class="step">STEP 2</div>
+<h2>確認需求（挑 1～2 題問）</h2>
+<ul>
+<li>目前接送是用什麼車？有輪椅升降設備嗎？</li>
+<li>一天大概接送幾位？有坐輪椅的嗎？</li>
+<li>現在的車用多久了？有考慮汰換或增購嗎？</li>
+<li>有在申請政府補助（如長照交通車）嗎？</li>
+</ul>
+</section>
+
+<section>
+<div class="step">STEP 3</div>
+<h2>依回答回應</h2>
+<table>
+<tr><td>有需求</td><td>「我們有<b>升降機</b>和<b>斜坡</b>兩種改裝款式，可以依您的車型、接送人數和輪椅使用狀況來建議，方便留個聯絡方式，我們安排業務帶車去給您試乘？」</td></tr>
+<tr><td>還在評估</td><td>「沒關係，我先留型錄給您，也可以幫您了解補助怎麼申請。」</td></tr>
+<tr><td>已經有車</td><td>「那之後改裝、保養或增購都可以找我們，留個名片保持聯繫。」</td></tr>
+<tr><td>沒需求</td><td>「了解！如果有合作單位需要，也歡迎幫我們介紹，謝謝您。」</td></tr>
+</table>
+</section>
+
+<section>
+<div class="step">STEP 4</div>
+<h2>收尾：留資料</h2>
+<p class="say">方便跟您要張名片，或加個 LINE 嗎？我們會再跟您聯絡，不會打擾太多。</p>
+<div class="chk">
+<label><input type="checkbox" id="c1">單位名稱 ＋ 聯絡人／職稱</label>
+<label><input type="checkbox" id="c2">電話或 LINE</label>
+<label><input type="checkbox" id="c3">需求：車型、人數、時程</label>
+<label><input type="checkbox" id="c4">在名片背面寫下熱度 A／B／C</label>
+</div>
+</section>
+
+<section>
+<h2>小提醒</h2>
+<ul>
+<li><b>微笑、簡短</b>，對方忙就直接留型錄＋名片。</li>
+<li>避開對方攤位<b>正在接待客人</b>的時候。</li>
+<li>每拜訪完一攤，<b>當場記重點</b>，回來比較好跟進。</li>
+</ul>
+</section>
+</div>
+</body>
+</html>
