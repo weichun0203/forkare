@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>輔康簡道雲系統架構</title>
+<style>
+:root{--red:#D70029;--g1:#595757;--g2:#949495;--g3:#C9CACA;--g4:#EFEFEF;--bg:#FFFFFF;--card:#F7F7F7;--line:#C9CACA;--txt:#595757}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1E1E1E;--card:#2A2A2A;--txt:#E6E6E6;--g1:#E6E6E6;--g4:#333;--line:#555}}
+:root[data-theme="dark"]{--bg:#1E1E1E;--card:#2A2A2A;--txt:#E6E6E6;--g1:#E6E6E6;--g4:#333;--line:#555}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"獅尾螺帽腿黑-Demi-Light","Swei Nut Leg CJK TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.6}
+h1,h2,.k b{font-family:"獅尾螺帽腿黑-Black","Swei Nut Leg CJK TC","Noto Sans TC",sans-serif}
+h3,th,.tag,nav a{font-family:"獅尾螺帽腿黑-Bold","Swei Nut Leg CJK TC","Noto Sans TC",sans-serif}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 16px 64px}
+header h1{margin:0;font-size:30px;color:var(--g1)} header h1 em{font-style:normal;color:var(--red)}
+header p{margin:4px 0 0;color:var(--g2);font-size:14px}
+nav{position:sticky;top:0;background:var(--bg);z-index:5;padding:10px 0;border-bottom:1px solid var(--line);margin:20px 0 8px;display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--g1);text-decoration:none;font-size:14px} nav a:hover{color:var(--red)}
+section{margin-top:44px} h2{font-size:22px;margin:0 0 4px;color:var(--g1)} .sub{color:var(--g2);font-size:13px;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
+.k{background:var(--card);border-radius:12px;padding:14px 16px} .k b{display:block;font-size:30px;color:var(--g1)} .k b.r{color:var(--red)} .k span{font-size:12px;color:var(--g2)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--g2);margin:8px 0 14px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px}
+.sA{background:var(--red)} .sB{background:var(--bg);border:2px solid var(--red)} .sC{background:#595757} .sD{background:#949495} .sE{background:var(--bg);border:2px dashed #949495} .sF{background:#C9CACA}
+.diagram{background:var(--card);border-radius:14px;padding:12px;overflow-x:auto}
+.diagram svg{display:block;min-width:1100px;width:100%;height:auto}
+svg text{font-family:inherit;fill:var(--txt)}
+.layer{display:grid;grid-template-columns:140px 1fr;gap:10px;margin-bottom:10px;align-items:stretch}
+.layer>h3{margin:0;background:var(--g4);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--g1);text-align:center;padding:8px}
+.boxes{display:flex;flex-wrap:wrap;gap:8px}
+.app{border-radius:10px;padding:8px 12px;font-size:13px;min-width:150px;flex:1 1 150px;background:var(--bg);border:1px solid var(--line)}
+.app b{font-family:"獅尾螺帽腿黑-Bold",sans-serif;display:block;font-size:14px;color:var(--g1)} .app small{color:var(--g2);font-size:11px}
+.app.A{border:2px solid var(--red)} .app.A b::before{content:"●";color:var(--red);margin-right:4px}
+.app.B{border:2px dashed var(--red)} .app.C{border-left:0;border:2px solid #595757} .app.D{border:2px solid #949495;opacity:.85} .app.E{border:2px dashed #949495} .app.F{border:1px solid var(--line);opacity:.7}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px}
+.card{background:var(--card);border-radius:14px;padding:16px} .card h3{margin:0 0 8px;font-size:16px;color:var(--g1)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px}
+.flow .n{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 9px}
+.flow .n.hot{border-color:var(--red);color:var(--red)} .flow .n.cold{color:var(--g2);border-style:dashed}
+.flow .ar{color:var(--g2)}
+.card ul{margin:8px 0 0;padding-left:18px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:12px;overflow:hidden}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top} th{background:var(--g4);color:var(--g1);cursor:pointer;white-space:nowrap}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11px;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.tA{background:var(--red);color:#fff} .tB{border:1px solid var(--red);color:var(--red)} .tC{background:#595757;color:#fff} .tD{background:#949495;color:#fff} .tE{border:1px dashed #949495;color:var(--g2)} .tF{background:#C9CACA;color:#595757}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters button{border:1px solid var(--line);background:var(--bg);color:var(--txt);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+.filters button.on{border-color:var(--red);color:var(--red)}
+.tblwrap{overflow-x:auto}
+.issue{display:grid;grid-template-columns:36px 1fr;gap:10px;margin-bottom:12px}
+.issue .no{width:32px;height:32px;border-radius:50%;border:2px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font-family:"獅尾螺帽腿黑-Black",sans-serif}
+.issue h3{margin:0;font-size:15px;color:var(--g1)} .issue p{margin:2px 0 0;font-size:13px}
+footer{margin-top:48px;font-size:12px;color:var(--g2)}
+</style></head><body><div class="wrap">
+<header>
+<h1>輔康企業 簡道雲 <em>系統架構與流程圖</em></h1>
+<p>資料掃描日：2026-10-12 ・ 來源：Jodoo 工作台全部 32 個應用（以目前登入帳號可見權限讀取）</p>
+<div class="kpis">
+<div class="k"><b>32</b><span>應用</span></div>
+<div class="k"><b>301</b><span>表單</span></div>
+<div class="k"><b>112</b><span>儀表板</span></div>
+<div class="k"><b>79</b><span>流程表單</span></div>
+<div class="k"><b class="r">5</b><span>核心運作中的應用</span></div>
+<div class="k"><b>16</b><span>範本 / 空殼 / 測試</span></div>
+</div>
+</header>
+<nav><a href="#arch">1 系統架構</a><a href="#flow">2 端到端業務流程</a><a href="#apps">3 各系統內部流程</a><a href="#links">4 跨應用資料關聯</a><a href="#list">5 應用狀態清單</a><a href="#gaps">6 斷點與建議</a></nav>
+
+<section id="arch"><h2>1. 系統架構總覽</h2><p class="sub">依功能分層，框線代表使用狀態</p>
+<div class="legend"><span><i class="sA"></i>核心運作中：近 30 天持續有新資料</span><span><i class="sB"></i>低頻使用：近 90 天內有異動，但頻率低</span><span><i class="sC"></i>待機 / 休眠：超過 90 天無新資料</span><span><i class="sD"></i>已停用・唯讀封存：明確標示停用，保留查詢</span><span><i class="sE"></i>需管理員確認：目前帳號僅有填報權限，無法讀取資料量</span><span><i class="sF"></i>範本 / 空殼 / 測試：套用範本或建置中，未見實際資料</span></div>
+<div id="layers"></div>
+</section>
+
+<section id="flow"><h2>2. 端到端業務流程（核心營運鏈）</h2><p class="sub">由表單之間的「關聯資料 / 關聯查詢」欄位反推；紅框 = 近 30 天活躍節點，虛線 = 低用量或未使用</p>
+<div class="diagram"><svg id="e2e" viewBox="0 0 1240 560"></svg></div>
+</section>
+
+<section id="apps"><h2>3. 各系統內部流程</h2><p class="sub">括號內為目前可讀筆數 / 近 30 天新增（抽樣上限 200）</p>
+<div class="grid2" id="appflows"></div>
+</section>
+
+<section id="links"><h2>4. 跨應用資料關聯</h2><p class="sub">箭頭方向：引用方 → 被引用方（例如 生產計畫 引用 CRM 客戶訂單）</p>
+<div class="diagram"><svg id="net" viewBox="0 0 1240 600"></svg></div>
+</section>
+
+<section id="list"><h2>5. 應用狀態清單</h2><p class="sub">點欄位標題可排序；「—」代表目前帳號只有填報權限，無法讀取資料量</p>
+<div class="filters" id="filters"></div>
+<div class="tblwrap"><table id="tbl"><thead><tr><th data-k="name">應用</th><th data-k="grp">工作台分組</th><th data-k="st">狀態</th><th data-k="created">建立日</th><th data-k="forms">表單</th><th data-k="dash">儀表板</th><th data-k="flow">流程</th><th data-k="rec">可讀筆數</th><th data-k="n30">近30天新增</th><th data-k="last">最後異動</th><th>說明</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="gaps"><h2>6. 流程斷點與整理建議</h2><p class="sub">從資料量與關聯結構觀察到的問題</p>
+<div id="issues"></div>
+</section>
+
+<footer>說明：筆數為目前登入帳號權限範圍內的總數；「近 30 天新增」以每張表最新 200 筆的建立時間計算，200 為上限。應用建立日由系統物件 ID 推算。需完整盤點請以管理員帳號於「應用管理」複核。</footer>
+</div>
+<script>
+const D={"scanDate": "2026-10-12", "plan": {"edition": "Jodoo 企業版 (Silver)", "users": 31, "managers": 10, "formDataLimit": 500000, "dataLimit": 3000000}, "totals": {"apps": 32, "forms": 301, "dashboards": 112, "flowForms": 79, "readableForms": 57, "visibleRecords": 22083}, "statusDef": {"A": {"label": "核心運作中", "desc": "近 30 天持續有新資料"}, "B": {"label": "低頻使用", "desc": "近 90 天內有異動，但頻率低"}, "C": {"label": "待機 / 休眠", "desc": "超過 90 天無新資料"}, "D": {"label": "已停用・唯讀封存", "desc": "明確標示停用，保留查詢"}, "E": {"label": "需管理員確認", "desc": "目前帳號僅有填報權限，無法讀取資料量"}, "F": {"label": "範本 / 空殼 / 測試", "desc": "套用範本或建置中，未見實際資料"}}, "apps": [{"name": "CRM客戶管理系統", "grp": "輔康企業", "created": "2024-10-14", "forms": 14, "dash": 4, "flow": 6, "rec": 6469, "last": "2026-10-12", "n30": 339, "n90": 405, "st": "A", "note": "客戶基本訊息 3,620 筆、客戶聯絡人 2,827 筆，每日更新；需求單/訂單筆數偏少"}, {"name": "車輛移動管理系統", "grp": "輔康企業", "created": "2025-03-14", "forms": 3, "dash": 5, "flow": 1, "rec": 1216, "last": "2026-10-12", "n30": 176, "n90": 298, "st": "A", "note": "車輛入出廠及移車登記 940 筆、在廠狀態 276 筆，每日使用"}, {"name": "生產管理系統", "grp": "輔康企業", "created": "2025-08-28", "forms": 22, "dash": 21, "flow": 5, "rec": 724, "last": "2026-10-12", "n30": 32, "n90": 110, "st": "A", "note": "生產計畫 333 筆持續新增；2026 生產排程計畫表 391 筆；儀表板 21 個含測試版"}, {"name": "維修客服系統", "grp": "輔康企業", "created": "2025-06-03", "forms": 2, "dash": 0, "flow": 1, "rec": 258, "last": "2026-10-12", "n30": 32, "n90": 106, "st": "A", "note": "客戶滿意度調查 177 筆、維修保養服務 81 筆"}, {"name": "行銷課", "grp": "部門應用", "created": "2024-03-26", "forms": 43, "dash": 13, "flow": 10, "rec": 763, "last": "2026-10-12", "n30": 35, "n90": 148, "st": "A", "note": "「聯絡我們」集客表單 320 筆持續進件、日報表 144 筆；其餘多為舊設計案/問卷/拷貝表單"}, {"name": "認證", "grp": "輔康企業", "created": "2026-04-13", "forms": 1, "dash": 0, "flow": 0, "rec": 19, "last": "2026-08-31", "n30": 0, "n90": 6, "st": "B", "note": "認證案件紀錄表 19 筆，案件型低頻使用"}, {"name": "跨部門合作任務", "grp": "其他", "created": "2026-05-19", "forms": 3, "dash": 0, "flow": 3, "rec": 39, "last": "2026-10-02", "n30": 0, "n90": 1, "st": "B", "note": "部門協作表單 39 筆，10/02 仍有更新"}, {"name": "活動管理", "grp": "輔康企業", "created": "2025-12-02", "forms": 3, "dash": 2, "flow": 1, "rec": 11, "last": "2026-06-09", "n30": 0, "n90": 0, "st": "C", "note": "活動型：市場活動 2 筆、問卷 9 筆，活動結束後待機"}, {"name": "售服課", "grp": "部門應用", "created": "2024-04-23", "forms": 16, "dash": 3, "flow": 6, "rec": 469, "last": "2026-06-22", "n30": 0, "n90": 0, "st": "C", "note": "商品滿意度調查 450 筆，已由維修客服系統承接"}, {"name": "工程課", "grp": "部門應用", "created": "2024-04-12", "forms": 8, "dash": 1, "flow": 0, "rec": 20, "last": "2026-03-23", "n30": 0, "n90": 0, "st": "C", "note": "作業標準書 19 筆、新開發評估單 1 筆"}, {"name": "共用表單", "grp": "其他", "created": "2024-08-06", "forms": 4, "dash": 0, "flow": 0, "rec": 33, "last": "2024-10-14", "n30": 0, "n90": 0, "st": "C", "note": "ISO 風險管制表 29 筆、會議記錄 3 筆"}, {"name": "資材課", "grp": "部門應用", "created": "2024-01-22", "forms": 24, "dash": 4, "flow": 8, "rec": 2, "last": "2024-08-06", "n30": 0, "n90": 0, "st": "C", "note": "套用行政範本，表單引用「總務事項」；僅 2 筆工作紀錄"}, {"name": "業務課-已停用可查詢", "grp": "部門應用", "created": "2024-03-25", "forms": 10, "dash": 3, "flow": 1, "rec": 12026, "last": "2025-07-22", "n30": 0, "n90": 0, "st": "D", "note": "舊業務系統 12,026 筆，2025/07 移轉至 CRM客戶管理系統；仍引用 CRM 範本"}, {"name": "輔康QC", "grp": "輔康企業", "created": "2025-03-11", "forms": 22, "dash": 4, "flow": 4, "rec": null, "last": null, "n30": null, "n90": null, "st": "E", "note": "新版進廠/成品/委外/出廠檢驗串接生產與車輛；另有 8 張 old/待刪除/拷貝表單"}, {"name": "行政管理", "grp": "客製化服務", "created": "2025-04-28", "forms": 1, "dash": 0, "flow": 1, "rec": null, "last": null, "n30": null, "n90": null, "st": "E", "note": "季考核表單（130 欄位，含流程）"}, {"name": "品保課", "grp": "部門應用", "created": "2024-04-26", "forms": 1, "dash": 1, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "E", "note": "僅一張車輛進廠檢查表，功能已併入輔康QC"}, {"name": "設備管理與巡檢", "grp": "部門應用", "created": "2026-07-17", "forms": 19, "dash": 4, "flow": 1, "rec": 30, "last": "2024-10-25", "n30": 0, "n90": 0, "st": "F", "note": "2026/07 套用範本，資料為範本示範資料；與財產管理交叉引用"}, {"name": "財務課", "grp": "部門應用", "created": "2026-07-17", "forms": 0, "dash": 0, "flow": 0, "rec": 0, "last": null, "n30": 0, "n90": 0, "st": "F", "note": "空應用，尚無表單"}, {"name": "CRM 客戶關係管理範本", "grp": "客製化服務", "created": "2025-06-06", "forms": 21, "dash": 21, "flow": 8, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "官方範本；仍被業務課與售服課舊表單引用，刪除前需解除"}, {"name": "品質管理", "grp": "其他", "created": "2024-04-01", "forms": 28, "dash": 13, "flow": 10, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "官方品管範本（進料/製程/產品/出貨/庫存檢驗）"}, {"name": "生產中心", "grp": "其他", "created": "2024-04-16", "forms": 12, "dash": 2, "flow": 1, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "官方生產範本，含「應用簡介/使用說明」"}, {"name": "總務事項", "grp": "其他", "created": "2024-12-10", "forms": 15, "dash": 3, "flow": 4, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "辦公用品/車輛/預算範本，與資材課重複"}, {"name": "財產管理", "grp": "其他", "created": "2025-02-21", "forms": 8, "dash": 3, "flow": 1, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "財產範本，被設備管理與巡檢引用"}, {"name": "專案管理", "grp": "其他", "created": "2026-06-29", "forms": 8, "dash": 2, "flow": 5, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "專案/任務/工時範本"}, {"name": "車輛登記", "grp": "其他", "created": "2024-07-19", "forms": 1, "dash": 1, "flow": 1, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "早期車輛登記表，已由車輛移動管理系統取代"}, {"name": "生產課", "grp": "其他", "created": "2024-08-07", "forms": 1, "dash": 0, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "早期生產報工，已由生產管理系統取代"}, {"name": "Timesheet Template", "grp": "其他", "created": "2025-07-31", "forms": 3, "dash": 1, "flow": 1, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "英文工時範本"}, {"name": "Employee Laptop Agreement Form", "grp": "其他", "created": "2024-12-12", "forms": 1, "dash": 0, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "英文範本"}, {"name": "Information Request Form", "grp": "其他", "created": "2024-12-12", "forms": 1, "dash": 0, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "英文範本"}, {"name": "集客", "grp": "其他", "created": "2025-12-29", "forms": 0, "dash": 0, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "目前帳號看不到任何表單（空應用或無權限）"}, {"name": "Sortimo(測試)", "grp": "其他", "created": "2026-07-03", "forms": 3, "dash": 1, "flow": 0, "rec": null, "last": null, "n30": null, "n90": null, "st": "F", "note": "Sortimo 諮詢/業務輸入測試"}, {"name": "富喆改裝聯盟", "grp": "其他", "created": "2026-08-17", "forms": 3, "dash": 0, "flow": 0, "rec": 0, "last": null, "n30": 0, "n90": 0, "st": "F", "note": "建置中：3 張表單皆尚未設計欄位"}], "hotForms": [["客戶基本訊息", "CRM", 3620, 162], ["客戶聯絡人", "CRM", 2827, 177], ["車輛入出廠及移車登記", "車輛移動", 940, 143], ["生產計畫", "生產管理", 333, 32], ["聯絡我們（集客）", "行銷課", 320, 35], ["車輛在廠狀態管理", "車輛移動", 276, 33], ["客戶滿意度調查表", "維修客服", 177, 21], ["維修保養服務表單", "維修客服", 81, 11]]};
+const SL=D.statusDef;
+// layers
+const L=[
+ ["外部入口 / 集客",["行銷課"],"官網「聯絡我們」、Sortimo/露營改裝商集客"],
+ ["核心營運鏈",["CRM客戶管理系統","生產管理系統","車輛移動管理系統","輔康QC","維修客服系統"]],
+ ["支援作業",["認證","跨部門合作任務","活動管理","行政管理","工程課","售服課","共用表單"]],
+ ["封存 / 舊系統",["業務課-已停用可查詢","資材課","品保課","車輛登記","生產課"]],
+ ["範本 / 建置中",["CRM 客戶關係管理範本","品質管理","生產中心","總務事項","財產管理","設備管理與巡檢","專案管理","財務課","集客","Sortimo(測試)","富喆改裝聯盟","Timesheet Template","Employee Laptop Agreement Form","Information Request Form"]]
+];
+const A=Object.fromEntries(D.apps.map(a=>[a.name,a]));
+document.getElementById('layers').innerHTML=L.map(([t,ns,extra])=>`<div class="layer"><h3>${t}</h3><div class="boxes">${ns.map(n=>{const a=A[n];return `<div class="app ${a.st}"><b>${n}</b><small>${SL[a.st].label} ・ 表單 ${a.forms} ・ ${a.rec!=null?a.rec.toLocaleString()+' 筆':'筆數未知'}</small></div>`}).join('')}${extra?`<div class="app" style="flex:2;border-style:dotted"><small>${extra}</small></div>`:''}</div></div>`).join('');
+
+// SVG helpers
+const NS='http://www.w3.org/2000/svg';
+function el(svg,tag,attrs,txt){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e}
+function defs(svg){const d=el(svg,'defs',{});const m=document.createElementNS(NS,'marker');[['id','ar'],['viewBox','0 0 10 10'],['refX','9'],['refY','5'],['markerWidth','7'],['markerHeight','7'],['orient','auto-start-reverse']].forEach(([k,v])=>m.setAttribute(k,v));const p=document.createElementNS(NS,'path');p.setAttribute('d','M0,0 L10,5 L0,10 z');p.setAttribute('fill','#949495');m.appendChild(p);d.appendChild(m);
+ const m2=m.cloneNode(true);m2.setAttribute('id','arr');m2.firstChild.setAttribute('fill','#D70029');d.appendChild(m2)}
+function node(svg,n){const st=n.s||'n';const stroke=st==='hot'?'#D70029':st==='cold'?'#949495':'#595757';
+ el(svg,'rect',{x:n.x,y:n.y,width:n.w||150,height:n.h||48,rx:10,fill:'var(--bg)',stroke,'stroke-width':st==='hot'?2.2:1.3,'stroke-dasharray':st==='cold'?'5 4':''});
+ el(svg,'text',{x:n.x+(n.w||150)/2,y:n.y+(n.sub?20:29),'text-anchor':'middle','font-size':13.5,'font-weight':700},n.t);
+ if(n.sub)el(svg,'text',{x:n.x+(n.w||150)/2,y:n.y+37,'text-anchor':'middle','font-size':11,style:'fill:#949495'},n.sub)}
+function edge(svg,a,b,opt={}){const ax=a.x+(a.w||150),ay=a.y+(a.h||48)/2,bx=b.x,by=b.y+(b.h||48)/2;let d;
+ if(opt.up){const x1=a.x+(a.w||150)/2,y1=a.y,x2=b.x+(b.w||150)/2,y2=b.y+(b.h||48);d=`M${x1},${y1} L${x2},${y2}`}
+ else if(opt.v){const x1=a.x+(a.w||150)/2,y1=a.y+(a.h||48),x2=b.x+(b.w||150)/2,y2=b.y;d=`M${x1},${y1} C${x1},${(y1+y2)/2} ${x2},${(y1+y2)/2} ${x2},${y2}`}
+ else if(opt.back){const x1=a.x+(a.w||150)/2,y1=a.y+(a.h||48),x2=b.x+(b.w||150)/2,y2=b.y+(b.h||48);const yy=Math.max(y1,y2)+opt.back;d=`M${x1},${y1} C${x1},${yy} ${x2},${yy} ${x2},${y2}`}
+ else d=`M${ax},${ay} C${(ax+bx)/2},${ay} ${(ax+bx)/2},${by} ${bx},${by}`;
+ el(svg,'path',{d,fill:'none',stroke:opt.hot?'#D70029':'#949495','stroke-width':opt.hot?2:1.3,'stroke-dasharray':opt.dash?'5 4':'','marker-end':opt.hot?'url(#arr)':'url(#ar)'});
+ if(opt.label){const p=svg.lastChild;const len=p.getTotalLength?p.getTotalLength():0;const pt=len?p.getPointAtLength(len/2):{x:(ax+bx)/2,y:(ay+by)/2};el(svg,'text',{x:pt.x,y:pt.y-5,'text-anchor':'middle','font-size':11,style:'fill:#949495'},opt.label)}}
+function lane(svg,x,y,w,h,t){el(svg,'rect',{x,y,width:w,height:h,rx:14,fill:'none',stroke:'var(--line)','stroke-dasharray':'2 4'});el(svg,'text',{x:x+12,y:y+20,'font-size':12,style:'fill:#949495','font-weight':700},t)}
+
+// E2E
+(function(){const s=document.getElementById('e2e');defs(s);
+ lane(s,10,10,250,540,'① 集客 / 線索（行銷課・CRM）');lane(s,270,10,300,540,'② 客戶與銷售（CRM客戶管理系統）');lane(s,580,10,330,540,'③ 生產與車輛（生產・車輛移動・QC）');lane(s,920,10,310,540,'④ 交車後服務（維修客服）');
+ const N={
+  web:{x:40,y:50,t:'官網 / LINE 詢問',sub:'外部入口',s:'n'},
+  lx:{x:40,y:140,t:'聯絡我們',sub:'320 筆・30天 +35',s:'hot'},
+  call:{x:40,y:230,t:'新客戶來電紀錄',sub:'9 筆',s:'cold'},
+  pool:{x:40,y:320,t:'A02 蒐集 → A03 線索池',sub:'各 1 筆',s:'cold'},
+  act:{x:40,y:420,t:'活動管理 / 問卷',sub:'11 筆・待機',s:'cold'},
+  cust:{x:300,y:50,w:240,t:'客戶基本訊息 + 聯絡人',sub:'3,620 + 2,827 筆・每日更新',s:'hot'},
+  opp:{x:300,y:150,w:240,t:'新商機管理 / 業務日報表',sub:'0 / 1 筆',s:'cold'},
+  req:{x:300,y:250,w:240,t:'客戶需求單（含變更）',sub:'7 筆',s:'cold'},
+  ord:{x:300,y:350,w:240,t:'客戶訂單 / 取消訂單',sub:'3 筆',s:'cold'},
+  erp:{x:300,y:450,w:240,t:'文中 ERP（外部）',sub:'CRM「文中系統資料區」',s:'n'},
+  car:{x:610,y:50,w:270,t:'車輛入出廠及移車登記',sub:'940 筆・30天 +143',s:'hot'},
+  state:{x:610,y:140,w:270,t:'車輛在廠狀態管理 ⇄ 位置移動',sub:'276 筆・30天 +33',s:'hot'},
+  plan:{x:610,y:230,w:270,t:'生產計畫 / 2026 排程表',sub:'333 + 391 筆',s:'hot'},
+  work:{x:610,y:320,w:270,t:'生產報工 / 工作日報 / 班表',sub:'僅填報權限・筆數未知',s:'n'},
+  qc:{x:610,y:410,w:270,t:'輔康QC：進廠 / 委外 / 成品 / 出廠檢驗',sub:'由生產「完工/委外通知QC」觸發',s:'n',h:56},
+  fix:{x:950,y:140,w:250,t:'維修保養服務表單',sub:'81 筆・30天 +11・引用CRM基本資料',s:'hot'},
+  sat:{x:950,y:240,w:250,t:'客戶滿意度調查表',sub:'177 筆・30天 +21',s:'hot'},
+  ss:{x:950,y:340,w:250,t:'售服課（舊）滿意度 / 報修',sub:'450 筆・6月後待機',s:'cold'},
+  cert:{x:950,y:440,w:250,t:'認證案件紀錄表',sub:'19 筆・低頻',s:'n'}
+ };
+ Object.values(N).forEach(n=>node(s,n));
+ edge(s,N.web,N.lx,{v:1});edge(s,N.lx,N.cust,{hot:1,label:'人工轉入'});edge(s,N.call,N.cust,{dash:1});edge(s,N.pool,N.cust,{dash:1});edge(s,N.act,N.pool,{up:1,dash:1});
+ edge(s,N.cust,N.opp,{v:1,dash:1});edge(s,N.opp,N.req,{v:1,dash:1});edge(s,N.req,N.ord,{v:1,dash:1});edge(s,N.erp,N.ord,{dash:1,up:1});
+ edge(s,N.cust,N.car,{hot:1});edge(s,N.ord,N.plan,{});edge(s,N.car,N.state,{v:1,hot:1});edge(s,N.state,N.plan,{v:1,hot:1});edge(s,N.plan,N.work,{v:1});edge(s,N.work,N.qc,{v:1});
+ edge(s,N.state,N.fix,{hot:1});edge(s,N.fix,N.sat,{v:1,hot:1});edge(s,N.sat,N.ss,{v:1,dash:1});
+})();
+
+// internal flows
+const F=[
+ ["CRM客戶管理系統","A",[["A02線索蒐集","cold"],["A03線索池","cold"],["客戶基本訊息 3,620","hot"],["客戶聯絡人 2,827","hot"],["新商機管理","cold"],["客戶需求單 7","cold"],["客戶訂單 3","cold"]],["14 表單 / 6 流程 / 4 儀表板（KPI達成、業務主管作業平台、業務部狀態、行銷業務追蹤）","主檔維護非常活躍；商機→需求→訂單段落幾乎沒有資料，疑似訂單仍在文中 ERP 或 Excel 進行","「商機管理(停用，僅查詢)」「客製化需求單保留」可封存"]],
+ ["生產管理系統","A",[["客戶訂單(CRM)","n"],["生產計畫 333","hot"],["生產班表/排程","n"],["生產報工","n"],["工作日報表","n"],["完工/委外通知QC","n"]],["22 表單 / 5 流程 / 21 儀表板（二廠、三廠現場大看板、排程表、人員排工…）","生產計畫引用 CRM 訂單、車輛在廠狀態、外包工程、廠別產線設定","另有「生產報工_新測試」「未命名表單」「生產排程表_測試版」「未命名儀表板」待整理"]],
+ ["車輛移動管理系統","A",[["車輛入出廠及移車登記 940","hot"],["車輛在廠狀態管理 276","hot"],["車輛位置移動記錄表","n"]],["3 表單 / 1 流程 / 5 儀表板","入廠登記引用 CRM 客戶基本訊息、需求單、訂單；在廠狀態被生產計畫、QC 進廠與成品檢驗引用 → 是全廠的車輛主檔","「委外施工登記」「預約出車登記」儀表板放在暫保留"]],
+ ["輔康QC","E",[["車輛進廠檢查表","n"],["委外工程檢查表","n"],["成品檢驗紀錄表","n"],["出廠檢驗紀錄表-NEW","n"]],["22 表單 / 4 流程 / 4 儀表板","新版表單引用 車輛在廠狀態、生產計畫、CRM 客戶訂單","8 張 old / 待刪除 / 僅查詢 / 拷貝表單；進料檢驗(AQL、品名品號表)為新規劃區塊"]],
+ ["維修客服系統","A",[["維修保養服務表單 81","hot"],["客戶滿意度調查表 177","hot"]],["2 表單 / 1 流程","兩張表皆引用 CRM 基本資料","已取代售服課的「商品客戶滿意度調查表」(450 筆，6/22 後無新增)"]],
+ ["行銷課・集客系統","A",[["聯絡我們 320","hot"],["Sortimo / 露營改裝商 / 福祉車集客","cold"],["主動式集客","cold"],["日報表 144","hot"]],["43 表單 / 10 流程 / 13 儀表板","「聯絡我們」近 30 天 +35 筆，是目前唯一活躍的線上集客入口","43 張表單中約 30 張為舊設計案、人格測驗、問卷或拷貝/未命名表單"]]
+];
+document.getElementById('appflows').innerHTML=F.map(([t,st,ns,li])=>`<div class="card"><h3><span class="tag t${st}">${SL[st].label}</span> ${t}</h3><div class="flow">${ns.map(([n,c])=>`<span class="n ${c}">${n}</span>`).join('<span class="ar">→</span>')}</div><ul>${li.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+
+// network
+(function(){const s=document.getElementById('net');defs(s);
+ const P={
+  "CRM客戶管理系統":[520,250],"生產管理系統":[860,130],"車輛移動管理系統":[860,330],"輔康QC":[1080,230],"維修客服系統":[240,110],"認證":[240,230],"行銷課":[240,350],
+  "業務課-已停用可查詢":[300,500],"CRM 客戶關係管理範本":[600,500],"售服課":[880,500],"設備管理與巡檢":[1080,430],"財產管理":[1080,540],"資材課":[110,560],"總務事項":[110,450]
+ };
+ const E=[["生產管理系統","CRM客戶管理系統",1],["生產管理系統","車輛移動管理系統",1],["車輛移動管理系統","CRM客戶管理系統",1],["輔康QC","車輛移動管理系統",1],["輔康QC","生產管理系統",1],["輔康QC","CRM客戶管理系統",0],["維修客服系統","CRM客戶管理系統",1],["認證","CRM客戶管理系統",0],["業務課-已停用可查詢","CRM 客戶關係管理範本",0],["售服課","CRM 客戶關係管理範本",0],["設備管理與巡檢","財產管理",0],["資材課","總務事項",0]];
+ const R=w=>({w:w||170,h:46});
+ E.forEach(([a,b,hot])=>{const [x1,y1]=P[a],[x2,y2]=P[b];const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);const ox=dx/L,oy=dy/L;const k=1/Math.max(Math.abs(ox)/88,Math.abs(oy)/26);
+  el(s,'line',{x1:x1+ox*k,y1:y1+oy*k,x2:x2-ox*(k+4),y2:y2-oy*(k+4),stroke:hot?'#D70029':'#949495','stroke-width':hot?2:1.2,'stroke-dasharray':hot?'':'5 4','marker-end':hot?'url(#arr)':'url(#ar)'})});
+ Object.entries(P).forEach(([n,[x,y]])=>{const a=A[n];const st=a.st;const stroke=st==='A'?'#D70029':st==='B'?'#D70029':st==='C'?'#595757':'#949495';
+  el(s,'rect',{x:x-85,y:y-23,width:170,height:46,rx:10,fill:st==='F'?'var(--g4)':'var(--bg)',stroke,'stroke-width':st==='A'?2.2:1.3,'stroke-dasharray':(st==='B'||st==='E')?'5 4':''});
+  el(s,'text',{x,y:y-3,'text-anchor':'middle','font-size':13,'font-weight':700},n.replace('-已停用可查詢','(停用)').replace('客戶關係管理範本','範本'));
+  el(s,'text',{x,y:y+14,'text-anchor':'middle','font-size':10.5,style:'fill:#949495'},SL[st].label)});
+ el(s,'text',{x:20,y:30,'font-size':12,style:'fill:#949495'},'紅色實線 = 活躍應用之間的資料串接；灰色虛線 = 舊系統 / 範本之間的殘留引用');
+})();
+
+// table
+let cur='all',sk='st',asc=true;
+const fb=document.getElementById('filters');
+fb.innerHTML=`<button data-f="all" class="on">全部 (${D.apps.length})</button>`+Object.entries(SL).map(([k,v])=>`<button data-f="${k}">${v.label} (${D.apps.filter(a=>a.st===k).length})</button>`).join('');
+fb.onclick=e=>{const b=e.target.closest('button');if(!b)return;cur=b.dataset.f;fb.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));draw()};
+document.querySelectorAll('#tbl th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;asc=sk===k?!asc:true;sk=k;draw()});
+function draw(){const rows=D.apps.filter(a=>cur==='all'||a.st===cur).sort((a,b)=>{let x=a[sk],y=b[sk];if(x==null)return 1;if(y==null)return -1;return (x>y?1:x<y?-1:0)*(asc?1:-1)});
+ document.querySelector('#tbl tbody').innerHTML=rows.map(a=>`<tr><td>${a.name}</td><td>${a.grp}</td><td><span class="tag t${a.st}">${SL[a.st].label}</span></td><td>${a.created}</td><td class="num">${a.forms}</td><td class="num">${a.dash}</td><td class="num">${a.flow}</td><td class="num">${a.rec!=null?a.rec.toLocaleString():'—'}</td><td class="num">${a.n30!=null?a.n30:'—'}</td><td>${a.last||'—'}</td><td>${a.note}</td></tr>`).join('')}
+draw();
+
+// issues
+const I=[
+ ["線上集客未接到 CRM 線索池","「聯絡我們」320 筆持續進件，但 CRM 的 A02/A03 線索池各只有 1 筆，兩者沒有欄位關聯 → 線索轉客戶靠人工，無法追蹤轉換率。建議：以資料推送/智能助手把「聯絡我們」自動寫入 A03 線索池。"],
+ ["銷售後段（商機→需求→訂單）幾乎沒在 Jodoo 跑","客戶主檔 3,620 筆，但需求單 7、訂單 3、商機 0；而生產計畫 333 筆卻引用「客戶訂單」。代表訂單實際在文中 ERP 或線下處理，Jodoo 內的訂單鏈是斷的。建議：確定訂單的單一來源（ERP 同步或 Jodoo 建單），避免生產計畫手動對單。"],
+ ["同功能應用重複 3～4 套","生產：生產管理系統 / 生產中心 / 生產課；品管：輔康QC / 品保課 / 品質管理；行政：資材課 / 總務事項；CRM：CRM客戶管理系統 / CRM範本 / 業務課；資產：財產管理 / 設備管理與巡檢；車輛：車輛移動管理 / 車輛登記。建議保留第一套，其餘封存。"],
+ ["範本與舊系統仍有殘留引用","業務課(停用)與售服課「F100 售後服務表單」仍關聯 CRM 範本；設備管理與巡檢引用財產管理。直接刪除範本會讓舊資料的關聯欄位失效，需先解除關聯或匯出備份。"],
+ ["表單與儀表板雜訊多","約 9 張「未命名表單」、8 張「_拷貝」、10 餘張 old/待刪除/僅查詢表單、6 個未命名儀表板；生產管理系統單一應用就有 21 個儀表板含測試版。建議建立命名規則並每季清理。"],
+ ["權限盤點不完整","目前帳號在 301 張表單中僅 57 張可讀資料，其餘為填報權限（例如生產報工、輔康QC 新版檢驗表）。輔康QC、行政管理、品保課的實際使用量需由管理員帳號複核。"]
+];
+document.getElementById('issues').innerHTML=I.map(([h,p],i)=>`<div class="issue"><div class="no">${i+1}</div><div><h3>${h}</h3><p>${p}</p></div></div>`).join('');
+</script></body></html>
