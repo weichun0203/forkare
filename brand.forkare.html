@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>輔康企業｜色彩・字體・字卡速查</title>
+<style>
+:root{--bg:#fff;--ink:#595757;--mid:#949495;--line:#C9CACA;--card:#f4f4f4;--red:#D70029;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#232222;--ink:#e6e6e6;--card:#2e2d2d;--line:#595757}}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;font-family:"獅尾螺帽腿黑-Demi-Light","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.w{max-width:1000px;margin:0 auto;padding:0 16px}
+h1,h2,h3,p{margin:0}
+.fb{font-family:"獅尾螺帽腿黑-Black","Noto Sans TC","PingFang TC",sans-serif;font-weight:900}
+.fbo{font-family:"獅尾螺帽腿黑-Bold","Noto Sans TC","PingFang TC",sans-serif;font-weight:700}
+.fd{font-family:"獅尾螺帽腿黑-Demi-Light","Noto Sans TC","PingFang TC",sans-serif;font-weight:400}
+header{padding:40px 0 18px}
+header small{color:var(--red)}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.25;margin:6px 0 8px}
+h1 i{font-style:normal;color:var(--red)}
+header p{color:var(--mid);max-width:640px}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:2px solid var(--line)}
+.tabs .w{display:flex;gap:6px;padding-top:8px;padding-bottom:8px}
+.tabs button{flex:1;padding:10px 6px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;cursor:pointer;font:inherit;font-size:16px}
+.tabs button.on{background:#595757;color:#fff;border-color:#595757;box-shadow:inset 0 -3px 0 var(--red)}
+.view{display:none;padding-bottom:20px}.view.on{display:block}
+section{padding:34px 0 4px}
+h2{font-size:23px;margin-bottom:4px}
+h2 b{color:var(--red);margin-right:8px}
+.sub{color:var(--mid);margin:0 0 16px;font-size:15px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.sw{display:grid;grid-template-columns:88px 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);cursor:pointer;min-height:110px}
+.sw:active{transform:scale(.985)}
+.sw .chip{min-height:100%}
+.sw .in{padding:10px 14px;min-width:0}
+.nm{font-size:17px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nm em{font-style:normal;font-size:11px;background:var(--line);color:#333;border-radius:4px;padding:0 6px;font-family:sans-serif}
+.hex{font-size:21px;letter-spacing:.5px;color:var(--ink)}
+.hex small{font-size:12px;color:var(--mid);margin-left:6px;letter-spacing:0}
+.adj{display:flex;gap:6px;margin:3px 0}
+.adj i{font-style:normal;font-size:13px;border:1px solid var(--red);color:var(--red);border-radius:99px;padding:0 10px}
+.sw p{font-size:13px;color:var(--mid);line-height:1.5}
+.note{border-left:4px solid var(--red);background:var(--card);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:15px}
+.note.soft{border-left-color:#949495}
+.bar{display:flex;height:20px;border-radius:6px;overflow:hidden;margin:8px 0}
+.bar i{display:block}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit;font-size:14px;text-decoration:none}
+.btn.pri{background:#595757;color:#fff;border-color:#595757}
+.fontrow{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px;background:var(--card)}
+.fontrow .s{font-size:28px;flex:1 1 200px}
+.fontrow p{flex:1 1 100%;font-size:13px;color:var(--mid)}
+details{border:1px solid var(--line);border-radius:10px;background:var(--card);margin-bottom:8px}
+summary{padding:10px 14px;cursor:pointer;font-size:16px}
+details ol,details ul{margin:0;padding:0 16px 12px 36px;font-size:15px}
+details li{margin:3px 0}
+code{background:var(--line);color:#333;border-radius:4px;padding:0 5px;font-size:13px}
+.t{paint-order:stroke fill;-webkit-text-stroke:.22em #fff;stroke-linejoin:round;letter-spacing:.02em}
+.red{color:var(--red)}.blk{color:#000}.wht{color:#fff;-webkit-text-stroke-color:#000}
+.tc{display:inline-block;background:#fff;color:var(--red);padding:.05em .4em;border-radius:6px}
+.stage{position:relative;border-radius:14px;padding:30px 14px 22px;text-align:center;font-size:clamp(24px,6vw,36px);line-height:1.5;min-height:120px}
+.stage small{display:block;font-size:12px;margin-top:6px;font-family:sans-serif;-webkit-text-stroke:0;letter-spacing:0}
+.light{background:#f2f2f2}.dark{background:#1a1a1a}
+.stage::after{position:absolute;top:8px;right:10px;font-size:12px;border-radius:4px;padding:0 6px;font-family:sans-serif;color:#fff;background:#595757}
+.ok::after{content:"✓ 正確"}.bad::after{content:"✕ 禁止";background:#000}
+.bad-t{color:var(--red);paint-order:stroke fill;-webkit-text-stroke:.22em #000}
+.sub-bar{display:inline-block;background:#595757;color:#fff;padding:4px 14px;border-radius:4px;font-size:clamp(18px,4vw,24px)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mid)}
+.d{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid #888;vertical-align:-1px;margin-right:4px}
+.tester{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:12px}
+.tester label{font-size:13px;color:var(--mid);display:block}
+.tester input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.cc{display:grid;gap:16px;grid-template-columns:230px 1fr;align-items:start}
+.phone{width:230px;aspect-ratio:9/16;border-radius:26px;border:6px solid #333;background:linear-gradient(160deg,#8a8a8b,#C9CACA 60%,#949495);position:relative;overflow:hidden;margin:0 auto}
+.phone .ov{position:absolute;left:0;right:0;top:32%;text-align:center;font-size:24px;line-height:1.4;padding:0 8px}
+.phone .cap{position:absolute;left:0;right:0;bottom:26%;text-align:center}
+.phone .cap span{background:#595757;color:#fff;font-size:12px;padding:2px 8px;border-radius:3px}
+.phone .ui{position:absolute;right:8px;bottom:26%;width:22px;display:grid;gap:8px}
+.phone .ui i{height:22px;border-radius:50%;background:rgba(255,255,255,.55)}
+.phone .dz{position:absolute;left:0;right:0;bottom:0;height:22%;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,.14) 6px,rgba(0,0,0,.14) 12px);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-family:sans-serif}
+.panel{background:#2b2b2b;color:#ddd;border-radius:14px;padding:14px;font-family:sans-serif;font-size:13px}
+.ptabs{display:flex;gap:16px;border-bottom:1px solid #444;margin-bottom:10px;padding-bottom:6px}
+.ptabs span{color:#999}.ptabs .on{color:#fff;border-bottom:2px solid var(--red);padding-bottom:6px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #3a3a3a;flex-wrap:wrap}
+.row em{font-style:normal;color:#fff;display:flex;align-items:center;gap:8px}
+.dot{width:16px;height:16px;border-radius:4px;border:1px solid #888;display:inline-block}
+.sl{width:110px;height:4px;background:#555;border-radius:2px;position:relative}
+.sl i{position:absolute;left:0;top:0;height:4px;width:60%;background:#fff;border-radius:2px}
+.sl b{position:absolute;left:60%;top:-5px;width:14px;height:14px;border-radius:50%;background:#fff;margin-left:-7px}
+.tl{margin-top:12px;display:grid;gap:5px}
+.tl div{height:20px;border-radius:4px;font-size:11px;line-height:20px;padding:0 8px;color:#fff}
+.steps{counter-reset:s;display:grid;gap:10px;margin:18px 0 0;padding:0;list-style:none}
+.steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--card);padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-size:15px}
+.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;text-align:center;line-height:26px;font-size:14px;font-family:sans-serif}
+.two{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.box{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--card)}
+.box h3{font-size:17px;margin-bottom:6px}
+.box ul{margin:0;padding-left:20px;font-size:15px}
+.combos{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.poster{aspect-ratio:3/4;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--line);cursor:pointer}
+.poster .k{font-size:12px;font-family:sans-serif}
+.poster h3{font-size:30px;line-height:1.25}
+.poster p{font-size:13px}
+.cap2{font-size:13px;color:var(--mid);margin-top:6px;text-align:center}
+footer{margin:40px 0 28px;color:var(--mid);font-size:13px;border-top:2px solid var(--line);padding-top:14px}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#595757;color:#fff;padding:10px 18px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:20;font-size:14px}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){.cc{grid-template-columns:1fr}.sw{grid-template-columns:76px 1fr}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<small class="fbo">輔康企業 Forkare</small>
+<h1 class="fb">色彩・字體・字卡<i>速查</i></h1>
+<p>點一下色卡就能複製色碼。上方切換「總覽、剪輯、海報製作」，看你現在要做的事。</p>
+</div></header>
+<div class="tabs"><div class="w">
+<button class="on fbo" data-v="overview">總覽</button><button class="fbo" data-v="edit">剪輯</button><button class="fbo" data-v="poster">海報製作</button>
+</div></div>
+
+<main class="w">
+<!-- ============ 總覽 ============ -->
+<div class="view on" id="v-overview">
+<section>
+<h2 class="fb"><b>01</b>品牌五色</h2>
+<p class="sub">灰色當主角，紅色（或粉色）只當一點點亮點。<button class="btn" id="all" style="margin-left:6px">複製全部色碼</button></p>
+<div class="grid">
+<div class="sw" role="button" tabindex="0" data-c="#D70029"><div class="chip" style="background:#D70029"></div><div class="in"><div class="nm fb">動能紅<em>主色</em></div><div class="hex fb">#D70029<small>RGB 215,0,41</small></div><div class="adj"><i>熱情</i><i>積極</i></div><p>重點字、數字、小圖示。不可做大色塊</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#EB6D94"><div class="chip" style="background:#EB6D94"></div><div class="in"><div class="nm fb">甜蜜粉<em>輔色</em></div><div class="hex fb">#EB6D94<small>RGB 235,109,148</small></div><div class="adj"><i>溫柔</i><i>浪漫</i></div><p>感謝、關懷內容。不可和紅色同畫面</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#595757"><div class="chip" style="background:#595757"></div><div class="in"><div class="nm fb">質感灰</div><div class="hex fb">#595757<small>RGB 89,87,87</small></div><div class="adj"><i>專業</i><i>穩重</i></div><p>字幕底色、標題與內文</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#949495"><div class="chip" style="background:#949495"></div><div class="in"><div class="nm fb">寧靜灰</div><div class="hex fb">#949495<small>RGB 148,148,149</small></div><div class="adj"><i>平和</i><i>穩定</i></div><p>次要文字、日期、說明</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#C9CACA"><div class="chip" style="background:#C9CACA"></div><div class="in"><div class="nm fb">清新灰</div><div class="hex fb">#C9CACA<small>RGB 201,202,202</small></div><div class="adj"><i>極簡</i><i>整潔</i></div><p>卡片底色、分隔線</p></div></div>
+</div>
+<div class="note"><b class="fbo">60／30／10：</b>灰階約九成，強調色約一成以內。
+<div class="bar"><i style="width:60%;background:#C9CACA"></i><i style="width:30%;background:#595757"></i><i style="width:10%;background:#D70029"></i></div>
+<b class="fbo">紅與粉二選一</b>，同一份輸出只用其中一個。</div>
+</section>
+
+<section>
+<h2 class="fb"><b>02</b>其他應用色與點綴色</h2>
+<p class="sub">這三色用在簡報底色、海報與特殊主題。</p>
+<div class="grid">
+<div class="sw" role="button" tabindex="0" data-c="#E5E0DD"><div class="chip" style="background:#E5E0DD"></div><div class="in"><div class="nm fb">溫暖灰<em>應用色</em></div><div class="hex fb">#E5E0DD<small>RGB 229,224,221</small></div><div class="adj"><i>親近</i><i>用心</i></div><p>簡報背景色，也適合海報底色</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#FABF13"><div class="chip" style="background:#FABF13"></div><div class="in"><div class="nm fb">溫煦黃<em>點綴色</em></div><div class="hex fb">#FABF13<small>RGB 250,191,19</small></div><div class="adj"><i>溫和</i><i>溫暖</i></div><p>「煦」讀作 ㄒㄩˋ（xù）。小面積點綴</p></div></div>
+<div class="sw" role="button" tabindex="0" data-c="#204C3B"><div class="chip" style="background:#204C3B"></div><div class="in"><div class="nm fb">森林綠<em>輔助色・暫定名</em></div><div class="hex fb">#204C3B<small>RGB 32,76,59</small></div><div class="adj"><i>自然</i><i>可靠</i></div><p>名稱與形容詞是暫定的，待確認</p></div></div>
+</div>
+<h3 class="fbo" style="margin:22px 0 8px;font-size:18px">建議搭配（非官方規定）</h3>
+<div class="combos">
+<div class="poster" style="background:#E5E0DD;color:#595757" data-c="#E5E0DD / #595757 / #D70029"><span class="k">溫暖灰底＋質感灰字＋紅點綴</span><h3 class="fb">暖心<span style="color:#D70029">服務</span></h3><p class="fd">最安全、最像品牌</p></div>
+<div class="poster" style="background:#204C3B;color:#fff;border-color:#204C3B" data-c="#204C3B / #FFFFFF / #FABF13"><span class="k">森林綠底＋白字＋黃點綴</span><h3 class="fb">自然<span style="color:#FABF13">好選擇</span></h3><p class="fd">適合健康、自然主題</p></div>
+<div class="poster" style="background:#E5E0DD;color:#204C3B" data-c="#E5E0DD / #204C3B / #FABF13"><span class="k">溫暖灰底＋綠標題＋黃小點</span><h3 class="fb">日常<span style="color:#204C3B">保養</span> <span style="background:#FABF13;border-radius:50%;display:inline-block;width:14px;height:14px"></span></h3><p class="fd" style="color:#595757">溫和、有親切感</p></div>
+</div>
+<div class="note soft"><b class="fbo">使用提醒：</b>一份輸出只選一個強調色（紅、粉、黃、綠擇一），畫面才不會亂。黃色底上不要放白字，看不清楚，改用質感灰或黑。以上搭法是建議，還沒有正式規定，點色塊可複製色碼。</div>
+</section>
+
+<section>
+<h2 class="fb"><b>03</b>字體：獅尾螺帽腿黑</h2>
+<p class="sub">只用三個字重。名稱要完整輸入，軟體才認得出來。</p>
+<div class="fontrow"><div class="s fb">主標題 1234</div><button class="btn" data-c="獅尾螺帽腿黑-Black">複製名稱</button><p>Black：封面大標、KPI 大數字</p></div>
+<div class="fontrow"><div class="s fbo">副標題 重點 1234</div><button class="btn" data-c="獅尾螺帽腿黑-Bold">複製名稱</button><p>Bold：副標題、章節小標、按鈕文字</p></div>
+<div class="fontrow"><div class="s fd">內文說明 1234</div><button class="btn" data-c="獅尾螺帽腿黑-Demi-Light">複製名稱</button><p>Demi-Light：字幕、內文、圖說</p></div>
+<div class="note"><b class="fbo">還沒有這套字體？</b>到下方連結下載，再照步驟安裝。<br><br>
+<a class="btn pri" href="https://github.com/max32002/swei-nut-sans" target="_blank" rel="noopener">前往下載（GitHub）</a></div>
+<details open><summary class="fbo">下載與安裝步驟</summary><ol>
+<li>打開上面的連結，找到字體檔下載處。可看頁面右側的 Releases，或按綠色 <code>Code</code> → <code>Download ZIP</code>。</li>
+<li>把下載的 ZIP 解壓縮，找到副檔名 <code>.ttf</code> 或 <code>.otf</code> 的字體檔。</li>
+<li>只裝需要的三個字重：Black、Bold、Demi-Light。</li>
+<li><b>Windows：</b>選取字體檔，按右鍵 →「為所有使用者安裝」。也可以直接複製到 <code>C:\Windows\Fonts</code>。</li>
+<li><b>Mac：</b>連按兩下字體檔，在字體簿按「安裝字體」。</li>
+<li>關閉再重開剪映、PPT、Word 等軟體，字體清單才會更新。</li>
+<li>在軟體裡搜尋「獅尾」。如果清單顯示的名稱和上面不同，以清單顯示的為準。</li>
+<li>回到本頁，上方三個字體範例變成漂亮的字形，就是安裝成功。</li>
+</ol></details>
+<details><summary class="fbo">手機剪映怎麼辦？</summary><ul>
+<li>手機版剪映對外部字體的支援，會因版本和手機系統不同。</li>
+<li>最穩的做法：在電腦用剪映做好字卡和字幕，再匯出影片。</li>
+<li>或先在電腦做好字卡圖片，傳到手機再放進影片。</li>
+</ul></details>
+</section>
+</div>
+
+<!-- ============ 剪輯 ============ -->
+<div class="view" id="v-edit">
+<section>
+<h2 class="fb"><b>01</b>字幕與字卡規則</h2>
+<p class="sub">外框粗細統一設 <b class="fbo" style="color:var(--red)">60</b>（剪映描邊粗細滑桿）。</p>
+<div class="tw"><table>
+<tr><th>情境</th><th>文字</th><th>文字色</th><th>外框／底</th></tr>
+<tr><td>字幕（任何底）</td><td>全部</td><td><i class="d" style="background:#fff"></i>白 #FFFFFF</td><td>質感灰 #595757 背景</td></tr>
+<tr><td rowspan="3">淺色底</td><td>重點字</td><td><i class="d" style="background:#D70029"></i>動能紅 #D70029</td><td>白外框 60</td></tr>
+<tr><td>一般字</td><td><i class="d" style="background:#000"></i>黑 #000000</td><td>白外框 60</td></tr>
+<tr><td>一般字（另一款）</td><td><i class="d" style="background:#fff"></i>白 #FFFFFF</td><td>黑外框 60</td></tr>
+<tr><td rowspan="3">深色底</td><td>重點字</td><td><i class="d" style="background:#D70029"></i>動能紅 #D70029</td><td>白外框 60</td></tr>
+<tr><td>一般字</td><td><i class="d" style="background:#000"></i>黑 #000000</td><td>白外框 60</td></tr>
+<tr><td>一般字（另一款）</td><td><i class="d" style="background:#fff"></i>白 #FFFFFF</td><td>黑外框 60</td></tr>
+<tr><td>整句都是標題字卡</td><td>整句</td><td><i class="d" style="background:#D70029"></i>動能紅 #D70029</td><td>白色底 60</td></tr>
+</table></div>
+<div class="note"><b class="fbo">永遠禁止：</b>紅色文字配黑色外框。</div>
+<div class="grid" style="margin-top:14px">
+<div class="stage light ok fb"><span class="t blk">今天教你</span><span class="t red">3 招</span><small>淺色底：黑字白框＋紅字白框</small></div>
+<div class="stage light ok fb"><span class="t wht">今天教你</span><span class="t red">3 招</span><small>淺色底：白字黑框＋紅字白框</small></div>
+<div class="stage dark ok fb"><span class="t blk">今天教你</span><span class="t red">3 招</span><small style="color:#C9CACA">深色底：黑字白框＋紅字白框</small></div>
+<div class="stage dark ok fb"><span class="t wht">今天教你</span><span class="t red">3 招</span><small style="color:#C9CACA">深色底：白字黑框＋紅字白框</small></div>
+<div class="stage light ok fb" style="padding-top:34px"><span class="tc">整句標題字卡</span><small style="color:#595757">紅字＋白色底</small></div>
+<div class="stage light ok" style="padding-top:38px"><span class="sub-bar fd">字幕：質感灰底＋白字</span></div>
+<div class="stage light bad fb"><span class="t blk">今天教你</span><span class="bad-t">3 招</span><small style="color:#595757">紅字配黑外框</small></div>
+</div>
+<div class="note soft">網頁用程式模擬外框，實際粗細以剪映滑桿 60 為準。</div>
+</section>
+
+<section>
+<h2 class="fb"><b>02</b>自己試排</h2>
+<div class="tester">
+<div><label>一般文字</label><input id="a" value="買了就不後悔的"></div>
+<div><label>重點文字（動能紅）</label><input id="b" value="保養秘訣"></div>
+</div>
+<div class="grid">
+<div class="stage light fb"><span class="t blk" data-a></span><span class="t red" data-b></span></div>
+<div class="stage dark fb"><span class="t wht" data-a></span><span class="t red" data-b></span></div>
+<div class="stage light fb" style="padding-top:36px"><span class="tc"><span data-a></span><span data-b></span></span></div>
+<div class="stage light" style="background:#C9CACA;padding-top:36px"><span class="sub-bar fd"><span data-a></span><span data-b></span></span></div>
+</div>
+</section>
+
+<section>
+<h2 class="fb"><b>03</b>剪映 CapCut 設定重點</h2>
+<p class="sub">下方是示意畫面，不是官方截圖。版本不同，按鈕名稱可能略有差異。</p>
+<div class="cc">
+<div><div class="phone">
+<div class="ov fb"><span class="t blk">今天教你</span><span class="t red">3 招</span></div>
+<div class="cap fd"><span>字幕：質感灰底白字</span></div>
+<div class="ui"><i></i><i></i><i></i></div>
+<div class="dz">平台按鈕區，別放字</div>
+</div></div>
+<div class="panel">
+<div class="ptabs"><span>基礎</span><span class="on">樣式</span><span>動畫</span></div>
+<div class="row"><em>字體</em><span>獅尾螺帽腿黑-Black</span></div>
+<div class="row"><em><i class="dot" style="background:#D70029"></i>文字顏色</em><span>#D70029</span></div>
+<div class="row"><em><i class="dot" style="background:#fff"></i>描邊顏色</em><span>#FFFFFF</span></div>
+<div class="row"><em>描邊粗細</em><div class="sl"><i></i><b></b></div><span>60</span></div>
+<div class="row"><em><i class="dot" style="background:#595757"></i>背景（字幕用）</em><span>#595757</span></div>
+<div class="tl"><div style="background:#595757">字幕軌：自動字幕</div><div style="background:#D70029;width:55%">字卡軌：重點字</div><div style="background:#444">影片軌</div></div>
+</div>
+</div>
+<ol class="steps">
+<li><div><b>先裝字體。</b>安裝方式在「總覽」頁最下方。裝好後重開剪映，字體清單才會出現。</div></li>
+<li><div><b>貼色碼，不要用眼睛挑色。</b>點文字顏色進色盤，找到色碼欄位，貼上複製的 HEX。描邊和背景也一樣。</div></li>
+<li><div><b>描邊粗細設 60。</b>描邊要打開，顏色和粗細才會生效。</div></li>
+<li><div><b>字幕用自動辨識。</b>文字 → 智能字幕（自動字幕）。先改好一句：白字、背景 #595757，再套用到全部字幕。</div></li>
+<li><div><b>存成預設樣式。</b>字卡調好後存成預設，下次一鍵套用。</div></li>
+<li><div><b>匯出前檢查。</b>暫停在各畫面，確認沒有紅字黑框，字也沒壓到平台按鈕區。</div></li>
+</ol>
+</section>
+</div>
+
+<!-- ============ 海報製作 ============ -->
+<div class="view" id="v-poster">
+<section>
+<h2 class="fb"><b>01</b>海報、封面基本配色</h2>
+<p class="sub">做封面、DM、FB 圖卡前先看這裡。點色塊複製色碼。</p>
+<div class="combos">
+<div class="poster" style="background:#fff;color:#595757" data-c="#595757 / #D70029"><span class="k">淺底：白＋質感灰＋紅點綴</span><h3 class="fb">夏季<span style="color:#D70029">特惠</span></h3><p class="fd">標題 Black，說明 Demi-Light</p></div>
+<div class="poster" style="background:#595757;color:#fff;border-color:#595757" data-c="#595757 / #FFFFFF / #D70029"><span class="k">深底：質感灰＋白字＋紅點綴</span><h3 class="fb">夏季<span class="t red" style="-webkit-text-stroke-width:.14em">特惠</span></h3><p class="fd">LOGO 用全白橫式版</p></div>
+<div class="poster" style="background:#E5E0DD;color:#595757" data-c="#E5E0DD / #595757 / #EB6D94"><span class="k">情感：溫暖灰＋粉點綴（不放紅）</span><h3 class="fb">謝謝你的<span style="color:#EB6D94">陪伴</span></h3><p class="fd">售後關懷、感謝文</p></div>
+</div>
+</section>
+
+<section>
+<h2 class="fb"><b>02</b>封面標題字卡</h2>
+<p class="sub">整句都是標題時，用紅字加白色底（60）。其他字用外框規則。</p>
+<div class="grid">
+<div class="stage light fb" style="background:#E5E0DD;padding-top:34px"><span class="tc">3 招搞定保養</span><small style="color:#595757">整句標題：紅字＋白色底</small></div>
+<div class="stage dark fb" style="padding-top:34px"><span class="tc">3 招搞定保養</span><small style="color:#C9CACA">深色封面也一樣</small></div>
+<div class="stage light fb"><span class="t blk">只要</span><span class="t red">3 招</span><span class="t blk">搞定</span><small style="color:#595757">混合句：黑字白框＋紅字白框</small></div>
+</div>
+<div class="note soft">封面上的描邊和底，都以白色為主，紅色字永遠不配黑外框。</div>
+</section>
+
+<section>
+<h2 class="fb"><b>03</b>短影片封面安全區</h2>
+<p class="sub">平台的按鈕和說明會蓋住畫面邊緣，文字避開斜線區。</p>
+<div style="max-width:230px;margin:0 auto"><div class="phone">
+<div class="ov fb" style="top:26%"><span class="tc" style="font-size:22px">3 招搞定</span></div>
+<div class="cap fd" style="bottom:34%"><span>副標放這裡</span></div>
+<div class="ui"><i></i><i></i><i></i></div>
+<div class="dz">底部約 20% 避開</div>
+</div><div class="cap2">各平台有差異，上線前用實機預覽一次</div></div>
+</section>
+
+<section>
+<h2 class="fb"><b>04</b>做與不做</h2>
+<div class="two">
+<div class="box"><h3 class="fbo">這樣做</h3><ul><li>標題 Black，副標 Bold，說明 Demi-Light</li><li>每張只放一組強調色</li><li>卡片底色用清新灰 #C9CACA 或溫暖灰 #E5E0DD</li><li>淺底用彩色正方版 LOGO，深底用全白橫式版</li></ul></div>
+<div class="box"><h3 class="fbo">不要這樣做</h3><ul><li>紅色當整張背景或大色塊</li><li>紅色與粉色同時出現</li><li>紅字配黑外框</li><li>黃色底上放白字</li><li>改 LOGO 顏色、比例、加陰影</li><li>LOGO 寬度小於 72px（印刷小於 1.5cm）</li></ul></div>
+</div>
+<div class="note soft">LOGO 四周要留出 F 圖標寬度一半的空白。</div>
+</section>
+</div>
+
+<footer>輔康企業 CIS 速查｜色碼與字體依公司品牌識別規範，標「建議」的內容尚待品牌確認</footer>
+</main>
+<div id="toast"></div>
+<script>
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.className='on';clearTimeout(window._t);window._t=setTimeout(function(){t.className=''},1600)}
+function cp(v){
+ function fb(){var x=document.createElement('textarea');x.value=v;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(x)}
+ try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).catch(fb)}else{fb()}}catch(e){fb()}
+ toast('已複製 '+v)
+}
+document.querySelectorAll('[data-c]').forEach(function(e){
+ e.addEventListener('click',function(){cp(e.getAttribute('data-c'))});
+ e.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();cp(e.getAttribute('data-c'))}})});
+document.getElementById('all').addEventListener('click',function(){
+ cp('動能紅 #D70029\n甜蜜粉 #EB6D94\n質感灰 #595757\n寧靜灰 #949495\n清新灰 #C9CACA\n溫暖灰 #E5E0DD\n溫煦黃 #FABF13\n森林綠 #204C3B')});
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+ document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+ document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+ document.getElementById('v-'+b.getAttribute('data-v')).classList.add('on');
+ window.scrollTo({top:0})})});
+function sync(){var a=document.getElementById('a').value,b=document.getElementById('b').value;
+ document.querySelectorAll('[data-a]').forEach(function(e){e.textContent=a});
+ document.querySelectorAll('[data-b]').forEach(function(e){e.textContent=b})}
+document.getElementById('a').addEventListener('input',sync);document.getElementById('b').addEventListener('input',sync);sync();
+</script>
+</body>
+</html>
