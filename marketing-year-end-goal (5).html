@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>行銷部｜年底目標衝刺</title>
+<style>
+*{box-sizing:border-box}body{margin:0;padding:24px;background:#faf9f6;color:#252520;font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif}main{max-width:1120px;margin:auto;background:white;border:1px solid #e9e6de;border-radius:22px;padding:30px}.top{display:flex;justify-content:space-between;gap:20px;align-items:start}.eyebrow{font-size:12px;letter-spacing:2px;color:#ae570e;font-weight:700}h1{font-size:26px;margin:9px 0 8px}p{margin:0;color:#77776d;font-size:13px;line-height:1.8}.pill{background:#fff2df;color:#9c500a;border-radius:30px;padding:9px 14px;white-space:nowrap;font-size:12px}.hero{display:grid;grid-template-columns:1fr 1.7fr;gap:28px;align-items:center;margin:24px 0}.ring{width:170px;height:170px;border-radius:50%;background:conic-gradient(#dc781b 0 var(--p,0%),#f1eee7 var(--p,0%) 100%);display:grid;place-items:center;margin:auto;transition:background .6s}.inside{width:140px;height:140px;border-radius:50%;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center}.inside strong{font-size:35px;letter-spacing:-1px}.inside span{font-size:12px;color:#77776d;margin-top:5px}.progress-label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px}.bar{height:10px;background:#f1eee7;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#dc781b;border-radius:20px;transition:width .6s}.total{font-size:20px;margin-bottom:20px}.total strong{font-size:36px}.total small{font-size:15px;color:#77776d}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.stat{border:1px solid #e9e6de;border-radius:14px;padding:18px 16px}.stat:nth-child(2){background:#fff8ef;border-color:#f4d9b9}.label{font-size:12px;color:#77776d}.number{font-size:32px;font-weight:750;margin:8px 0 5px;letter-spacing:-1px}.number em{font-style:normal;font-size:13px;font-weight:400;margin-left:5px}.hint{font-size:11px;color:#77776d}.section{border-top:1px solid #ece9e1;padding-top:22px;margin-top:24px}.sectionhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:10px}h2{font-size:16px;margin:0}.sectionhead span{font-size:12px;color:#77776d}.months{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.month{border:1px solid #e9e6de;border-radius:14px;padding:18px}.month-title{font-size:13px;font-weight:700}.month-title span{font-size:11px;color:#77776d;font-weight:400}.month strong{font-size:30px;display:block;color:#ae570e;margin:12px 0}.month strong small{font-size:12px;font-weight:400}.mini{height:5px;border-radius:10px;background:#f1eee7;margin:12px 0}.mini i{display:block;height:100%;border-radius:10px;background:#dc781b}.cumulative{font-size:12px;color:#77776d}.cumulative b{color:#252520}.pace{margin-top:16px;padding:14px 16px;background:#f8f7f3;border-radius:12px;font-size:13px;line-height:1.7}.pace b{color:#ae570e}.foot{font-size:11px;line-height:1.8;color:#85857a;margin-top:18px}.foot b{font-weight:500;color:#66665b}
+.live{display:inline-flex;align-items:center;gap:6px}.live i{width:7px;height:7px;border-radius:50%;background:#2e9e5b;display:inline-block}.live.err i{background:#d7193a}.live.err{color:#d7193a}
+.perf{border:1px solid #e9e6de;border-radius:14px;padding:18px 20px;margin-bottom:16px;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center}.perf .k{font-size:13px;font-weight:700}.perf .big{font-size:34px;font-weight:750;color:#dc781b;letter-spacing:-1px;margin:6px 0 4px}.perf .big em{font-style:normal;font-size:16px;margin-left:4px}.perf .sub2{font-size:12px;color:#77776d}.perf .subs{border-left:1px solid #ece9e1;padding-left:20px;font-size:13px;line-height:1.9}.perf .subs b{font-size:22px;color:#252520}.perf .subs .up{color:#2e9e5b;font-weight:700}.perf .subs .down{color:#d7193a;font-weight:700}.share{height:6px;border-radius:6px;background:#f1eee7;overflow:hidden;margin-top:8px;max-width:320px;display:flex}.share i{display:block;height:100%;background:#dc781b}.share i+i{background:#f4c08a}
+.detail-wrap{position:relative;display:inline-block;margin-top:12px}.detail-btn{border:1px solid #f4d9b9;background:#fff8ef;color:#9c500a;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}.detail-btn:hover,.detail-btn:focus{background:#fff2df;outline:none}
+.detail-pop{position:absolute;left:0;top:calc(100% + 8px);z-index:20;width:min(760px,calc(100vw - 48px));background:#fff;border:1px solid #e9e6de;border-radius:14px;box-shadow:0 14px 40px rgba(37,37,32,.16);padding:16px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:.18s}
+.detail-wrap:hover .detail-pop,.detail-wrap:focus-within .detail-pop,.detail-wrap.open .detail-pop{opacity:1;visibility:visible;transform:none}
+.detail-pop::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.dp-head{font-size:14px;font-weight:700;margin-bottom:4px}.dp-meta{font-size:11px;color:#85857a;margin-bottom:12px;line-height:1.6}.dp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.dp{border:1px solid #e9e6de;border-radius:12px;padding:12px}.dp .l{font-size:12px;color:#66665b}.dp .v{font-size:24px;font-weight:750;color:#dc781b;margin:6px 0 2px;letter-spacing:-.5px}.dp .v em{font-style:normal;font-size:13px;font-weight:400;margin-left:3px}.dp .s{font-size:11px;color:#77776d;line-height:1.5}
+.feeds{display:grid;grid-template-columns:1fr 1fr;gap:16px}.feed{border:1px solid #e9e6de;border-radius:14px;overflow:hidden}.feed h3{margin:0;padding:11px 16px;font-size:13px;background:#fff2df;color:#9c500a}.feed h3.sub{border-top:1px solid #f4d9b9}.row{display:flex;gap:10px;align-items:baseline;padding:12px 16px;border-top:1px solid #f1eee7;font-size:13px;line-height:1.6}.row:first-of-type{border-top:0}.row .date{color:#77776d;font-variant-numeric:tabular-nums;min-width:38px}.row .who{display:inline-flex;align-items:center;gap:5px;color:#77776d;white-space:nowrap}.row .who img{width:18px;height:18px;border-radius:50%;vertical-align:middle}.row a{color:#252520;text-decoration:none;font-weight:600}.row a:hover{color:#ae570e;text-decoration:underline}.row .num{color:#dc781b;font-weight:700;white-space:nowrap}.row .muted{color:#77776d;white-space:nowrap}.tag{font-size:11px;padding:1px 7px;border-radius:20px;background:#f1eee7;color:#66665b;white-space:nowrap}.feedfoot{padding:9px 16px;font-size:11px;color:#85857a;background:#faf9f6;border-top:1px solid #f1eee7}.feedfoot b{color:#ae570e;font-weight:600}.empty{padding:16px;font-size:12px;color:#85857a}.empty.err{color:#d7193a}
+@media(max-width:720px){.dp-grid{grid-template-columns:1fr 1fr}.perf{grid-template-columns:1fr}.perf .subs{border-left:0;padding-left:0;border-top:1px solid #ece9e1;padding-top:12px}.feeds{grid-template-columns:1fr}.row{flex-wrap:wrap}body{padding:12px}main{padding:20px}.top{display:block}.pill{display:inline-block;margin-top:12px}.hero{grid-template-columns:1fr;gap:20px}.stats{gap:8px}.stat{padding:14px 10px}.number{font-size:27px}.months{grid-template-columns:1fr}.month{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px}.month strong{margin:0;text-align:right}.mini{grid-column:1/-1;margin:4px 0}.cumulative{grid-column:1/-1}.sectionhead{display:block}.sectionhead span{display:block;margin-top:5px}h1{font-size:23px}}
+</style></head>
+<body><main>
+<div class="top"><div><div class="eyebrow">2026 MARKETING GOAL</div><h1>年底目標，還差多遠？</h1><p>行銷部年度目標 <b style="color:#ae570e" id="goalTxt">600 位</b> · 統計基準 <span id="baseTime">讀取中…</span> · <span class="live" id="live"><i></i><span id="liveTxt">連線中</span></span></p></div><span class="pill">衝刺終點　2026/12/31</span></div>
+<div class="hero"><div class="ring" id="ring" role="img" aria-label="目標達成率"><div class="inside"><strong><b id="pct" style="font-weight:inherit">--</b><span style="font-size:18px;color:inherit">%</span></strong><span>年度目標達成率</span></div></div><div><div class="total">目前累積 <strong id="count">--</strong> <small>／<span id="goal">600</span> 位</small></div><div class="progress-label"><span>已達成 <span id="count2">--</span> 位</span><b style="color:#ae570e" id="gapLbl">尚缺 -- 位</b></div><div class="bar"><i id="bar"></i></div><div class="stats"><div class="stat"><div class="label">距離年底</div><div class="number"><span id="days">--</span><em>天</em></div><div class="hint" id="daysHint">含今天與 12/31</div></div><div class="stat"><div class="label">尚需增加</div><div class="number"><span id="need">--</span><em>位</em></div><div class="hint" id="needHint">--</div></div><div class="stat"><div class="label">每完整月需追</div><div class="number"><span id="perMonth">--</span><em>位左右</em></div><div class="hint">按剩餘月份比例計算</div></div></div></div></div>
+<div class="section"><div class="sectionhead"><h2>建議每月衝刺節奏</h2><span id="planHead">--</span></div><div class="months" id="months"></div><div class="pace" id="pace">--</div></div>
+<div class="section"><div class="sectionhead"><h2>內容動態</h2><span>官網文章與 YouTube 每 10 分鐘自動更新</span></div>
+<div class="perf"><div><div class="k">📊 成效概況 · YouTube 本期新增觀看</div><div class="big" id="pfViews">--<em>次</em></div><div class="sub2" id="pfSub">讀取中…</div><div class="share" id="pfShare"></div>
+<div class="detail-wrap" id="dpWrap"><button class="detail-btn" type="button" aria-describedby="dpPop">📈 YouTube 詳細資料</button>
+<div class="detail-pop" id="dpPop" role="tooltip"><div class="dp-head">YouTube 詳細資料</div><div class="dp-meta" id="dpMeta">讀取中…</div>
+<div class="dp-grid">
+<div class="dp"><div class="l">🎬 公開影片</div><div class="v" id="dpVid">--<em>部</em></div><div class="s" id="dpVidS">--</div></div>
+<div class="dp"><div class="l">👁 全頻道觀看</div><div class="v" id="dpView">--</div><div class="s" id="dpViewS">--</div></div>
+<div class="dp"><div class="l">➕ 訂閱人數</div><div class="v" id="dpSub">--</div><div class="s" id="dpSubS">--</div></div>
+<div class="dp"><div class="l">🌐 本期新增觀看</div><div class="v" id="dpNew">--</div><div class="s" id="dpNewS">--</div></div>
+</div></div></div></div><div class="subs" id="pfSubs">訂閱 --</div></div>
+<div class="feeds">
+  <div class="feed"><h3>官網近期文章</h3><div id="posts"><div class="empty">讀取中…</div></div><div class="feedfoot" id="postsFoot">—</div></div>
+  <div class="feed"><h3>本期新上線</h3><div id="ytNew"><div class="empty">讀取中…</div></div><h3 class="sub">本週最佳成長影片</h3><div id="ytGrow"><div class="empty">讀取中…</div></div><div class="feedfoot" id="ytFoot">—</div></div>
+</div></div>
+<div class="section"><div class="sectionhead"><h2>市場與同業</h2><span id="mktTime">讀取中…</span></div>
+<div class="feeds" id="market"><div class="feed"><div class="empty">讀取中…</div></div></div></div>
+<div class="foot"><b>計算方式</b>　<span id="formula">--</span>週／日需求向上取整，按日曆日計算。<br><b>資料來源</b>　Jodoo「行銷部2026目標達成率」即時抓取（Google Apps Script 代理），每 <span id="refreshTxt">60</span> 秒自動更新；統計基準為最後一次成功抓取的時間。</div>
+</main>
+<script>
+/* ===== 設定區 ===== */
+const API_URL = "https://script.google.com/macros/s/AKfycbzTRKt7_vAwwOAClg2b9Ql4cXXtzbE_iE_wh5EurhFIRqk9q7pw3ETsMW3xiL5oJAT_/exec";
+const REFRESH_SEC = 60;
+const GOAL_FALLBACK = 600;
+const END = new Date(2026, 11, 31); // 衝刺終點
+/* ================== */
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, '0');
+const fmtTime = d => `${d.getFullYear()}/${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const dayStart = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+const DAY = 864e5;
+
+function render(count, goal, at) {
+  const today = dayStart(at);
+  const pct = Math.min(100, count / goal * 100);
+  const need = Math.max(0, goal - count);
+  const days = Math.max(0, Math.round((END - today) / DAY) + 1); // 含今天與 12/31
+
+  $('goalTxt').textContent = goal + ' 位';
+  $('goal').textContent = goal;
+  $('baseTime').textContent = fmtTime(at);
+  $('pct').textContent = pct.toFixed(1);
+  $('ring').style.setProperty('--p', pct + '%');
+  $('ring').setAttribute('aria-label', `目標達成率${pct.toFixed(1)}%`);
+  $('count').textContent = $('count2').textContent = count;
+  $('gapLbl').textContent = need ? `尚缺 ${need} 位` : '已達標 🎉';
+  $('bar').style.width = pct + '%';
+  $('days').textContent = days;
+  $('daysHint').textContent = `含 ${today.getMonth()+1}/${today.getDate()} 與 12/31`;
+  $('need').textContent = need;
+  $('needHint').textContent = `${goal} − ${count}`;
+
+  // 剩餘月份：本月按剩餘天數比例，其餘為完整月
+  const months = [];
+  for (let m = today.getMonth(); m <= 11 && today <= END; m++) {
+    const dim = new Date(2026, m + 1, 0).getDate();
+    const startDay = m === today.getMonth() ? today.getDate() : 1;
+    months.push({ m, dim, startDay, frac: (dim - startDay + 1) / dim });
+  }
+  const units = months.reduce((s, x) => s + x.frac, 0);
+  const perMonth = units ? need / units : 0;
+  let alloc = months.map(x => Math.round(perMonth * x.frac));
+  if (alloc.length) alloc[alloc.length - 1] += need - alloc.reduce((a, b) => a + b, 0); // 合計對齊尚缺數
+  $('perMonth').textContent = Math.round(perMonth);
+
+  let cum = count;
+  $('months').innerHTML = months.map((x, i) => {
+    cum += alloc[i];
+    const partial = x.startDay > 1;
+    const last = i === months.length - 1;
+    return `<div class="month"><div class="month-title">${x.m+1} 月 <span>${partial ? `${x.m+1}/${x.startDay}–${x.m+1}/${x.dim}` : '完整月份'}</span></div>
+      <strong>+${alloc[i]} <small>位</small></strong><div class="mini"><i style="width:${Math.min(100, cum/goal*100).toFixed(1)}%"></i></div>
+      <div class="cumulative">${last ? '年底' : '月底'}累積目標 <b>${cum} 位</b></div></div>`;
+  }).join('');
+
+  const first = months[0];
+  $('planHead').textContent = first && first.startDay > 1
+    ? `${first.m+1} 月按剩餘時間分配 · 合計新增 ${need} 位`
+    : `合計新增 ${need} 位`;
+  $('pace').innerHTML = need
+    ? `換算追蹤節奏：約 <b>${Math.ceil(need / days * 7)} 位／週</b>，或約 <b>${Math.ceil(need / days)} 位／日</b>。這是達標所需的平均速度，並非實際成長預測。`
+    : '年度目標已達成，可以挑戰加碼目標！';
+  $('formula').textContent = first
+    ? `尚缺 ${need} 位 ÷（${first.m+1} 月剩餘 ${first.dim - first.startDay + 1}/${first.dim} 個月${months.length > 1 ? ' ＋ ' + months.slice(1).map(x => (x.m+1) + ' 月').join(' ＋ ') : ''}）＝${perMonth.toFixed(2)} 位／完整月；分配後為 ${alloc.join('＋')}。`
+    : '';
+}
+
+async function update() {
+  try {
+    const res = await fetch(API_URL + '?_t=' + Date.now());
+    const d = await res.json();
+    if (!d.ok) throw new Error(d.error || '資料格式錯誤');
+    const at = d.updated ? new Date(d.updated) : new Date();
+    render(Number(d.count), Number(d.target) || GOAL_FALLBACK, at);
+    $('live').className = 'live';
+    $('liveTxt').textContent = '即時同步';
+  } catch (e) {
+    $('live').className = 'live err';
+    $('liveTxt').textContent = '更新失敗，顯示上次資料';
+    console.error(e);
+  }
+}
+
+$('refreshTxt').textContent = REFRESH_SEC;
+update();
+setInterval(update, REFRESH_SEC * 1000);
+
+/* ===== 官網文章 + YouTube ===== */
+const WP_URL = "https://www.forkare.com/wp-json/wp/v2/posts?per_page=3&_embed=author";
+const FEED_REFRESH_SEC = 600;
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const unent = s => { const t = document.createElement('textarea'); t.innerHTML = s; return t.value; };
+const md = iso => { const d = new Date(iso); return `${d.getMonth()+1}/${d.getDate()}`; };
+const n = v => Number(v).toLocaleString('en-US');
+
+async function loadPosts() {
+  try {
+    const res = await fetch(WP_URL + '&_t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const total = res.headers.get('X-WP-Total');
+    const posts = await res.json();
+    $('posts').innerHTML = posts.map(p => {
+      const a = (p._embedded && p._embedded.author && p._embedded.author[0]) || {};
+      const name = a.name || (p.uagb_author_info && p.uagb_author_info.display_name) || '';
+      const av = a.avatar_urls && (a.avatar_urls['48'] || a.avatar_urls['24']);
+      return `<div class="row"><span class="date">${md(p.date)}</span>
+        ${name ? `<span class="who">${av ? `<img src="${esc(av)}" alt="">` : ''}${esc(name)}</span>` : ''}
+        <a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(unent(p.title.rendered))}</a></div>`;
+    }).join('') || '<div class="empty">目前沒有文章</div>';
+    $('postsFoot').innerHTML = `${total ? `已收錄 <b>${total} 篇</b>｜` : ''}核對 ${fmtTime(new Date())}`;
+  } catch (e) {
+    $('posts').innerHTML = `<div class="empty err">文章讀取失敗：${esc(e.message)}</div>`;
+  }
+}
+
+function renderPerf(sm, ch) {
+  const sd = s => s ? `${+s.slice(5,7)}/${+s.slice(8,10)}` : '';
+  if (!sm || !sm.days) {
+    $('pfViews').innerHTML = '--<em>次</em>';
+    $('pfSub').textContent = '快照累積中，明天起會顯示本期新增觀看';
+    $('pfShare').innerHTML = '';
+  } else {
+    $('pfViews').innerHTML = `${n(sm.periodViews)}<em>次</em>`;
+    const pct = sm.periodViews ? Math.round(sm.shortsViews / sm.periodViews * 100) : 0;
+    $('pfSub').textContent = `約 ${pct}% 來自 Shorts｜資料 ${sd(sm.from)}–${sd(sm.to)}（${sm.days} 天）`;
+    $('pfShare').innerHTML = `<i style="width:${pct}%" title="Shorts ${pct}%"></i><i style="width:${100-pct}%" title="長影片 ${100-pct}%"></i>`;
+  }
+  const subs = ch ? ch.subscribers : 0;
+  let line = `訂閱　<b>${n(subs)}</b> 人`;
+  if (sm && sm.subsDays) {
+    const dv = sm.subsDelta, cls = dv >= 0 ? 'up' : 'down';
+    line += `<br>近 ${sm.subsDays} 天 <span class="${cls}">${dv >= 0 ? '+' : ''}${dv}</span>（${sd(sm.subsFrom)} 起）`;
+  } else line += '<br><span class="sub2">訂閱成長累積中</span>';
+  $('pfSubs').innerHTML = line;
+}
+
+function renderDetail(sm, ch, updated) {
+  if (!sm) return;
+  const sd = s => s ? `${+s.slice(5,7)}/${+s.slice(8,10)}` : '';
+  const hasVid = sm.videos !== undefined;
+  const newCnt = (sm.newLong || 0) + (sm.newShorts || 0);
+  $('dpVid').innerHTML = hasVid ? `${n(sm.videos)}<em>部</em>` : '--';
+  $('dpVidS').textContent = hasVid ? `長 ${sm.longCount}／Shorts ${sm.shortsCount}` + (sm.days && newCnt ? `（本期 +${newCnt}）` : '') : '等待 Apps Script 更新';
+  $('dpView').textContent = n(ch.totalViews);
+  $('dpViewS').textContent = hasVid ? `公開影片合計 ${n(sm.publicViews)}` : 'YouTube API 即時數字';
+  $('dpSub').textContent = n(ch.subscribers);
+  $('dpSubS').textContent = sm.subsDays ? `近 ${sm.subsDays} 天 ${sm.subsDelta >= 0 ? '+' : ''}${sm.subsDelta}（${sd(sm.subsFrom)} 起）` : '訂閱成長累積中';
+  $('dpNew').textContent = sm.days ? n(sm.periodViews) : '--';
+  $('dpNewS').textContent = sm.days ? `${sd(sm.from)} → ${sd(sm.to)}（${sm.days} 天）` : '快照累積中';
+  $('dpMeta').textContent = `資料期間 ${sm.days ? sd(sm.from) + ' → ' + sd(sm.to) : '累積中'}｜YouTube Data API 擷取 ${fmtTime(new Date(updated))}｜全頻道觀看與訂閱為 API 即時數字`;
+}
+// 觸控裝置：點按鈕開關
+$('dpWrap').querySelector('button').addEventListener('click', e => { e.stopPropagation(); $('dpWrap').classList.toggle('open'); });
+document.addEventListener('click', e => { if (!$('dpWrap').contains(e.target)) $('dpWrap').classList.remove('open'); });
+
+async function loadYT() {
+  try {
+    const d = await (await fetch(API_URL + '?type=yt&_t=' + Date.now())).json();
+    if (!d.ok) throw new Error(d.error || '資料格式錯誤');
+    const kind = v => `<span class="tag">${v.isShort ? 'Shorts' : '長影片'}</span>`;
+    $('ytNew').innerHTML = d.fresh.map(v => `<div class="row">
+        <a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>${kind(v)}
+        <span class="num">${n(v.views)} 次</span><span class="muted">${md(v.publishedAt)} 上傳</span></div>`).join('')
+      || '<div class="empty">近期沒有新影片</div>';
+    $('ytGrow').innerHTML = d.growth.map(v => `<div class="row">
+        <a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>${kind(v)}
+        <span class="num">+${n(v.delta)} 次</span><span class="muted">累計 ${n(v.views)}</span></div>`).join('')
+      || `<div class="empty">${d.growthFrom === d.growthTo ? '快照累積中，明天起會顯示成長數據' : '這段期間沒有觀看成長'}</div>`;
+    const range = d.growthFrom && d.growthFrom !== d.growthTo
+      ? `${d.growthFrom.slice(5).replace('-', '/')}–${d.growthTo.slice(5).replace('-', '/')}` : '—';
+    renderPerf(d.summary, d.channel);
+    renderDetail(d.summary, d.channel, d.updated);
+    $('ytFoot').innerHTML = `訂閱 <b>${n(d.channel.subscribers)}</b>｜總觀看 ${n(d.channel.totalViews)}｜成長區間 ${range}｜YouTube 數據 ${fmtTime(new Date(d.updated))}`;
+  } catch (e) {
+    const msg = `<div class="empty err">YouTube 讀取失敗：${esc(e.message)}</div>`;
+    $('ytNew').innerHTML = msg; $('ytGrow').innerHTML = '';
+  }
+}
+
+async function loadMarket() {
+  try {
+    const d = await (await fetch(API_URL + '?type=market&_t=' + Date.now())).json();
+    if (!d.ok) throw new Error(d.error || '資料格式錯誤');
+    $('market').innerHTML = d.channels.map(c => `<div class="feed">
+      <h3><a href="${esc(c.url || 'https://www.youtube.com/' + c.handle)}" target="_blank" rel="noopener" style="color:inherit">${esc(c.name)}</a>
+        <span style="font-weight:400">（更新頻率：${esc(c.cadence || '—')}）</span></h3>
+      ${c.ok ? c.latest.map(v => `<div class="row">
+          <a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a><span class="tag">${v.isShort ? 'Shorts' : '長影片'}</span>
+          <span class="num">${n(v.views)} 次</span><span class="muted">${esc(v.date)}</span></div>`).join('')
+        : `<div class="empty err">讀取失敗：${esc(c.error)}</div>`}
+      ${c.ok ? `<div class="feedfoot">訂閱 <b>${n(c.subscribers)}</b>｜${esc(c.handle)}</div>` : ''}</div>`).join('');
+    $('mktTime').textContent = '截至 ' + fmtTime(new Date(d.updated)) + ' · 每 30 分鐘更新';
+  } catch (e) {
+    $('market').innerHTML = `<div class="feed"><div class="empty err">同業資料讀取失敗：${esc(e.message)}</div></div>`;
+  }
+}
+
+
+
+loadPosts(); loadYT(); loadMarket();
+setInterval(() => { loadPosts(); loadYT(); loadMarket(); }, FEED_REFRESH_SEC * 1000);
+</script>
+</body></html>
